@@ -2,13 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from lib.Scheduler import Scheduler
-from lib.Configuration import Configuration
 from waitress import serve
 from flask import Flask, request
+from lib.Scheduler import Scheduler
+from lib.Configuration import Configuration
+from lib.Persistence import Persistence
+
 
 app = Flask(__name__)
 scheduler = Scheduler()
+
 
 @app.route('/health')
 def health():
@@ -24,5 +27,9 @@ if __name__ == "__main__":
             logging.StreamHandler()
         ]
     )
+    pers = Persistence()
+    if pers.connect():
+        pers.migrate()
+        pers.disconnect()
     scheduler.start()
     serve(app, port=Configuration().app_port())
