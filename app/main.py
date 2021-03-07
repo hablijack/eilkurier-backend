@@ -6,8 +6,7 @@ from waitress import serve
 from flask import Flask, request
 from lib.Scheduler import Scheduler
 from lib.Configuration import Configuration
-from lib.Persistence import Persistence
-
+from db.Migration import Migration
 
 app = Flask(__name__)
 scheduler = Scheduler()
@@ -27,9 +26,7 @@ if __name__ == "__main__":
             logging.StreamHandler()
         ]
     )
-    pers = Persistence()
-    if pers.connect():
-        pers.migrate()
-        pers.disconnect()
+
+    Migration().migrate()
     scheduler.start()
     serve(app, port=Configuration().app_port())
