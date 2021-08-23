@@ -12,6 +12,8 @@ Represents the properties file and gives access to configuration options
 class Configuration:
 
     def __init__(self):
+        self.logger = logging.getLogger("Configuration")
+        self.logger.info("Initializing Configuration ...")
         self.config = configparser.ConfigParser()
         thisfolder = os.path.dirname(os.path.abspath(__file__))
         self.config.read(os.path.join(
