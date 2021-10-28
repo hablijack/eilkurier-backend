@@ -1,0 +1,11 @@
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/api/InformationResource.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/service/CronService.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/api/errorhandler/NotFoundExceptionMapper.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/api/errorhandler/IllegalArgumentExceptionMapper.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/lifecycle/DatabaseInitialLoad.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/api/FeedResource.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/service/FeedService.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/entity/Information.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/entity/Category.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/entity/Feed.java
+/home/christoph/Workspace/eilkurier-backend/src/main/java/de/hablijack/eilkurier/api/CategoryResource.java
