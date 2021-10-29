@@ -23,9 +23,13 @@ public class Information extends PanacheEntity {
   @Column(nullable = false)
   @Temporal(TemporalType.TIMESTAMP)
   public Date timestamp;
+  @Lob
   @Column(nullable = false)
+  @Type(type = "org.hibernate.type.TextType")
   public String title;
+  @Lob
   @Column(nullable = false)
+  @Type(type = "org.hibernate.type.TextType")
   public String author;
   @Lob
   @Column(nullable = false)
