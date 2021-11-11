@@ -20,9 +20,7 @@ public class Feed extends PanacheEntity {
 
   @Column(nullable = false)
   public String name;
-
   public String description;
-
   public String picture;
   public String pictureContentType;
   @ManyToOne(fetch = FetchType.LAZY)
@@ -31,6 +29,8 @@ public class Feed extends PanacheEntity {
   @OneToMany(fetch = FetchType.LAZY)
   @OrderBy("timestamp DESC")
   public Set<Information> information;
+  public String language;
+  public String copyright;
 
   public Feed() {
 
@@ -46,12 +46,6 @@ public class Feed extends PanacheEntity {
     this.category = category;
   }
 
-  public void persistIfNotExist() {
-    if (find("url = ?1", url).count() == 0) {
-      this.persist();
-    }
-  }
-
   @Override
   public String toString() {
     return "Feed{" +
@@ -62,6 +56,15 @@ public class Feed extends PanacheEntity {
         ", pictureContentType='" + pictureContentType + '\'' +
         ", category=" + category +
         ", information=" + information +
+        ", language='" + language + '\'' +
+        ", copyright='" + copyright + '\'' +
         '}';
   }
+
+  public void persistIfNotExist() {
+    if (find("url = ?1", url).count() == 0) {
+      this.persist();
+    }
+  }
+
 }

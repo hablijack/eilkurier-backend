@@ -20,37 +20,64 @@ public class Information extends PanacheEntity {
 
   @Transient
   public final int weight = 0;
+
   @Column(nullable = false)
   @Temporal(TemporalType.TIMESTAMP)
   public Date timestamp;
+
   @Lob
   @Column(nullable = false)
   @Type(type = "org.hibernate.type.TextType")
   public String title;
+
+  @Column(nullable = false)
+  public String guid;
+
   @Lob
   @Column(nullable = false)
   @Type(type = "org.hibernate.type.TextType")
   public String author;
+
   @Lob
   @Column(nullable = false)
   @Type(type = "org.hibernate.type.TextType")
   public String link;
+
   @Lob
   @Column
   @Type(type = "org.hibernate.type.TextType")
   public String picture;
+
   @Lob
   @Column(nullable = false)
   @Type(type = "org.hibernate.type.TextType")
   public String message;
+
   @Lob
   @Column(nullable = false)
   @Type(type = "org.hibernate.type.TextType")
   public String textonlymessage;
+
   @ManyToOne(fetch = FetchType.LAZY)
   public Feed feed;
 
-  public static boolean existsByTitleAndFeed(String title, Feed feed) {
-    return find("title = ?1 and feed = ?2", title, feed).count() > 0;
+  public static boolean existsByGuidAndFeed(String guid, Feed feed) {
+    return find("guid = ?1 and feed = ?2", guid, feed).count() > 0;
+  }
+
+  @Override
+  public String toString() {
+    return "Information{" +
+        "weight=" + weight +
+        ", timestamp=" + timestamp +
+        ", title='" + title + '\'' +
+        ", guid='" + guid + '\'' +
+        ", author='" + author + '\'' +
+        ", link='" + link + '\'' +
+        ", picture='" + picture + '\'' +
+        ", message='" + message + '\'' +
+        ", textonlymessage='" + textonlymessage + '\'' +
+        ", feed=" + feed +
+        '}';
   }
 }

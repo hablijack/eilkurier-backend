@@ -2,7 +2,6 @@ package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Information;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,7 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
 
-@RolesAllowed("user")
+//@RolesAllowed("user")
 @Path("api/information")
 @ApplicationScoped
 public class InformationResource {

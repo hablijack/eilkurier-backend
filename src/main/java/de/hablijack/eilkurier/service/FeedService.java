@@ -30,6 +30,7 @@ import org.xml.sax.SAXException;
 public class FeedService {
   private static final String TITLE = "title";
   private static final String DESCRIPTION = "description";
+  private static final String CONTENT = "content";
   private static final String CHANNEL = "channel";
   private static final String LANGUAGE = "language";
   private static final String COPYRIGHT = "copyright";
@@ -38,6 +39,7 @@ public class FeedService {
   private static final String ITEM = "item";
   private static final String PUB_DATE = "pubDate";
   private static final String GUID = "guid";
+  private static final String ENCLOSURE = "enclosure";
 
   private static final Logger LOGGER = Logger.getLogger(FeedService.class.getName());
 
@@ -57,6 +59,7 @@ public class FeedService {
       throws IOException, ParserConfigurationException, SAXException, XMLStreamException, ParseException {
     boolean isFeedHeader = true;
     String description = "";
+    String content = "";
     String title = "";
     String link = "";
     String language = "";
@@ -64,6 +67,7 @@ public class FeedService {
     String author = "";
     String pubdate = "";
     String guid = "";
+    String enclosure = "";
     XMLInputFactory inputFactory = XMLInputFactory.newInstance();
     InputStream in = new URL(feed.url).openStream();
     XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
@@ -71,70 +75,82 @@ public class FeedService {
       XMLEvent event = eventReader.nextEvent();
       if (event.isStartElement()) {
         String localPart = event.asStartElement().getName().getLocalPart();
-        switch (localPart) {
-          case ITEM:
-            if (isFeedHeader) {
-              isFeedHeader = false;
-            }
-            event = eventReader.nextEvent();
-            break;
-          case TITLE:
-            title = getCharacterData(event, eventReader);
-            break;
-          case DESCRIPTION:
-            description = getCharacterData(event, eventReader);
-            break;
-          case LINK:
-            link = getCharacterData(event, eventReader);
-            break;
-          case GUID:
-            guid = getCharacterData(event, eventReader);
-            break;
-          case LANGUAGE:
-            language = getCharacterData(event, eventReader);
-            break;
-          case AUTHOR:
-            author = getCharacterData(event, eventReader);
-            break;
-          case PUB_DATE:
-            pubdate = getCharacterData(event, eventReader);
-            break;
-          case COPYRIGHT:
-            copyright = getCharacterData(event, eventReader);
-            break;
+        if (localPart.equals("encoded")) {
+          localPart = event.asStartElement().getName().getPrefix();
+        }
+        if (localPart.contains(ITEM)) {
+          if (isFeedHeader) {
+            isFeedHeader = false;
+          }
+          event = eventReader.nextEvent();
+        } else if (localPart.contains(TITLE)) {
+          title = getCharacterData(event, eventReader);
+        } else if (localPart.contains(DESCRIPTION)) {
+          description = getCharacterData(event, eventReader);
+        } else if (localPart.contains(LINK)) {
+          link = getCharacterData(event, eventReader);
+        } else if (localPart.contains(GUID)) {
+          guid = getCharacterData(event, eventReader);
+        } else if (localPart.contains(LANGUAGE)) {
+          language = getCharacterData(event, eventReader);
+        } else if (localPart.contains(AUTHOR)) {
+          author = getCharacterData(event, eventReader);
+        } else if (localPart.contains(PUB_DATE)) {
+          pubdate = getCharacterData(event, eventReader);
+        } else if (localPart.contains(COPYRIGHT)) {
+          copyright = getCharacterData(event, eventReader);
+        } else if (localPart.contains(CONTENT)) {
+          content = getCharacterData(event, eventReader);
+        } else if (localPart.contains(ENCLOSURE)) {
+          enclosure = getCharacterData(event, eventReader);
         }
       } else if (event.isEndElement()) {
         if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
-          Information info = new Information();
-          info.feed = feed;
-          if (author.isEmpty()) {
-            info.author = feed.name;
-          } else {
-            info.author = author;
-          }
-          String message = "";
-          message = Jsoup.clean(description, Whitelist.basicWithImages());
-          if (message.length() > 1200) {
-            message = truncateMessageBody(message, 1195) + " (... weiterlesen ...)";
-          } else if (message.length() < 20) {
-            continue;
-          }
-          info.message = message;
-          Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
-          Matcher imageMatcher = regexImagePattern.matcher(message);
-          if (imageMatcher.find()) {
-            if (imageMatcher.group(1).contains("http")) {
-              info.picture = imageMatcher.group(1);
+          if (guid != null && guid.length() > 0 && !Information.existsByGuidAndFeed(guid, feed)) {
+            Information info = new Information();
+            info.feed = feed;
+            if (author.isEmpty()) {
+              info.author = feed.name;
+            } else {
+              info.author = author;
             }
+            String message = "";
+            if (content != null && content.length() > 0) {
+              message = content;
+            } else {
+              message = description;
+            }
+            if (message.length() > 1200) {
+              message = truncateMessageBody(message, 1195) + " (... weiterlesen ...)";
+            } else if (message.length() < 20) {
+              continue;
+            }
+            info.message = message;
+            if (enclosure.length() > 0) {
+              info.picture = enclosure;
+            } else {
+              Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
+              Matcher imageMatcher = regexImagePattern.matcher(message);
+              if (imageMatcher.find()) {
+                if (imageMatcher.group(1).contains("http")) {
+                  info.picture = imageMatcher.group(1);
+                }
+              }
+            }
+            info.textonlymessage = Jsoup.clean(message, Whitelist.simpleText());
+            info.guid = guid;
+            info.link = link;
+            info.title = title;
+            try {
+              info.timestamp = Date.from(Instant.from(DateTimeFormatter.RFC_1123_DATE_TIME.parse(pubdate)));
+            } catch (Exception ex) {
+              info.timestamp = new Date();
+              LOGGER.error(pubdate);
+            }
+            info.feed.language = language;
+            info.feed.copyright = copyright;
+            info.persist();
           }
-
-          info.textonlymessage = Jsoup.clean(message, Whitelist.simpleText());
-          //info.guid = guid;
-          info.link = link;
-          info.title = title;
-
-          info.timestamp = Date.from(Instant.from(DateTimeFormatter.RFC_1123_DATE_TIME.parse(pubdate)));
-          info.persist();
           event = eventReader.nextEvent();
           continue;
         }

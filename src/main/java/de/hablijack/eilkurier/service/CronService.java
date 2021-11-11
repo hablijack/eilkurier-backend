@@ -30,7 +30,6 @@ public class CronService {
     LOGGER.info("Starting to fetch Feeds...");
     List<Feed> allFeeds = Feed.listAll();
     for (Feed feed : allFeeds) {
-      //feedService.fetchFeedInformation(feed);
       eventBus.send("fetch_feed_information", feed);
     }
     LOGGER.info("Feeds fetched successfully.");

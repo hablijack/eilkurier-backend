@@ -2,18 +2,29 @@ package de.hablijack.eilkurier.lifecycle;
 
 import de.hablijack.eilkurier.entity.Category;
 import de.hablijack.eilkurier.entity.Feed;
+import de.hablijack.eilkurier.service.FeedService;
 import io.quarkus.runtime.Startup;
 import io.quarkus.runtime.StartupEvent;
+import java.io.IOException;
+import java.text.ParseException;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLStreamException;
+import org.xml.sax.SAXException;
 
 @Startup
 @ApplicationScoped
 public class DatabaseInitialLoad {
 
+  @Inject
+  FeedService feedService;
+
   @Transactional
-  public void initializeWithBaseData(@Observes StartupEvent event) {
+  public void initializeWithBaseData(@Observes StartupEvent event)
+      throws XMLStreamException, IOException, ParserConfigurationException, ParseException, SAXException {
     Category it = new Category("IT, Hardware, Software", "Nachrichten- und Artikelquellen über die digitale Welt.");
     it.persistIfNotExist();
     new Feed("Golem.de News", "IT-News fuer Profis", "https://www.golem.de/staticrl/images/golem-rss.png", "image/png",
