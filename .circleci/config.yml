@@ -1,7 +1,8 @@
 version: 2
 jobs:
   build:
-    machine: true
+    machine: 
+      image: ubuntu-2004:202008-01
     resource_class: medium
     working_directory: ~/repo
     environment:
