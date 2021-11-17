@@ -25,12 +25,10 @@ jobs:
           command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
           
-      - run: 
-          name: DockerHUB Login
-          command: |
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker run -d --name db company/proprietary-db:1.2.3
-     
+      - run: |
+         echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+         docker run -d --name db company/proprietary-db:1.2.3
+
       - run: 
           name: Build Docker Image
           command: docker build -f ./src/main/docker/Dockerfile.native -t hablijack/eilkurier-backend:latest .
