@@ -6,7 +6,7 @@ jobs:
     resource_class: medium
     working_directory: ~/repo
     environment:
-      MAVEN_OPTS: -Xmx6400m
+      MAVEN_OPTS: -Xmx7400m
       GRAALVM_HOME: /home/circleci/repo/.graalvm
     steps:
     
