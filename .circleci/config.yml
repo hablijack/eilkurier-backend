@@ -24,3 +24,15 @@ jobs:
           name: Build (Native)
           command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
+          
+     - run: 
+          name: DockerHUB Login
+          command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+     
+     - run: 
+          name: Build Docker Image
+          command: docker build -f ./src/main/docker/Dockerfile.native -t hablijack/eilkurier-backend:latest .
+          
+     - run: 
+          name: Push to DockerHUB
+          command: docker push hablijack/eilkurier-backend:latest
