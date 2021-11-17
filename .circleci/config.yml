@@ -25,9 +25,9 @@ jobs:
           command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
           
-      - run: |
-         echo ${DOCKER_PASS} | docker login --username ${DOCKER_USER} --password-stdin
-         docker run -d --name db company/proprietary-db:1.2.3
+      - run:
+          name: DockerHUB login
+          command: echo ${DOCKER_PASS} | docker login --username ${DOCKER_USER} --password-stdin
 
       - run: 
           name: Build Docker Image
