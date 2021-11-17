@@ -27,7 +27,9 @@ jobs:
           
       - run: 
           name: DockerHUB Login
-          command: echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
+          command: |
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker run -d --name db company/proprietary-db:1.2.3
      
       - run: 
           name: Build Docker Image
