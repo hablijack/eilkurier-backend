@@ -3,10 +3,10 @@ jobs:
   build:
     machine: 
       image: ubuntu-2004:202008-01
-    resource_class: medium
+    resource_class: medium+
     working_directory: ~/repo
     environment:
-      MAVEN_OPTS: -Xmx7400m
+      MAVEN_OPTS: -Xmx6400m
       GRAALVM_HOME: /home/circleci/repo/.graalvm
     steps:
     
@@ -22,7 +22,7 @@ jobs:
 
       - run:
           name: Build (Native)
-          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true -Dquarkus.native.native-image-xmx=7400
+          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
           
       - run:
