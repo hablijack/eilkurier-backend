@@ -22,7 +22,7 @@ jobs:
 
       - run:
           name: Build (Native)
-          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
+          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true -Dquarkus.native.native-image-xmx=7400
           no_output_timeout: 30m
           
       - run:
