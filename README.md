@@ -1,4 +1,6 @@
-# eilkurier-backend Project
+[![CircleCI](https://circleci.com/gh/hablijack/eilkurier-backend/tree/main.svg?style=svg)](https://circleci.com/gh/hablijack/eilkurier-backend/tree/main)
+
+# eilkurier-backend
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
