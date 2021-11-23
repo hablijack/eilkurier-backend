@@ -12,17 +12,23 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import org.eclipse.microprofile.graphql.Description;
 import org.hibernate.annotations.Type;
+
 
 @Entity
 @Table(name = "information", schema = "eilkurier")
+@org.eclipse.microprofile.graphql.Type
+@Description("The actual news to be consumed")
 public class Information extends PanacheEntity {
 
   @Transient
+  @Description("Ranking of the information, how important that news is for you.")
   public final int weight = 0;
 
   @Column(nullable = false)
   @Temporal(TemporalType.TIMESTAMP)
+  @Description("Point in time when this news were produced")
   public Date timestamp;
 
   @Lob
