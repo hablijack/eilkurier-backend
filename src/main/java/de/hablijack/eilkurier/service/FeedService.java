@@ -72,7 +72,7 @@ public class FeedService {
           if (item.hasGUID() && !Information.existsByGuidAndFeed(item.guid, feed)) {
             Information info = new Information();
             info.feed = feed;
-            if (item.author.isEmpty()) {
+            if (item.author == null || item.author.isEmpty()) {
               info.author = feed.name;
             } else {
               info.author = item.author;
