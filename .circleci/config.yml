@@ -6,7 +6,6 @@ jobs:
     resource_class: medium
     working_directory: ~/repo
     environment:
-      MAVEN_OPTS: -Xmx6400m -Xms6400m -XX:MaxPermSize=6400m
       GRAALVM_HOME: /home/circleci/repo/.graalvm
     steps:
 
@@ -22,7 +21,7 @@ jobs:
 
       - run:
           name: Build (Native)
-          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true -Dnative-image.xmx=6g
+          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
 
       - run:
