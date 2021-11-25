@@ -43,8 +43,8 @@ public class FeedService {
     inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
     URL url = new URL(feed.url);
     InetAddress inetAddress = InetAddress.getByName(url.getHost());
-    if (!url.getProtocol().startsWith("https") || inetAddress.isAnyLocalAddress() || inetAddress.isLoopbackAddress() ||
-        inetAddress.isLinkLocalAddress()) {
+    if (!url.getProtocol().startsWith("https") || inetAddress.isAnyLocalAddress() || inetAddress.isLoopbackAddress()
+        || inetAddress.isLinkLocalAddress()) {
       throw new IOException("Attack dected!");
     }
 
