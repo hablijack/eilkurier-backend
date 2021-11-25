@@ -15,6 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import org.xml.sax.SAXException;
 
+
 @Startup
 @ApplicationScoped
 public class DatabaseInitialLoad {
@@ -23,6 +24,7 @@ public class DatabaseInitialLoad {
   FeedService feedService;
 
   @Transactional
+  @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:LineLength"})
   public void initializeWithBaseData(@Observes StartupEvent event)
       throws XMLStreamException, IOException, ParserConfigurationException, ParseException, SAXException {
     Category it = new Category("IT, Hardware, Software", "Nachrichten- und Artikelquellen über die digitale Welt.");

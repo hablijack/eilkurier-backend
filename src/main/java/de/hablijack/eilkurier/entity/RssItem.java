@@ -18,15 +18,15 @@ public class RssItem {
   public String enclosure;
 
   public boolean hasGUID() {
-    return (guid != null && guid.length() > 1);
+    return guid != null && guid.length() > 1;
   }
 
   public boolean hasContent() {
-    return (content != null && content.length() > 1);
+    return content != null && content.length() > 1;
   }
 
   public boolean hasEnclusure() {
-    return (enclosure != null && enclosure.length() > 1);
+    return enclosure != null && enclosure.length() > 1;
   }
 
   public Date getPubdate() {

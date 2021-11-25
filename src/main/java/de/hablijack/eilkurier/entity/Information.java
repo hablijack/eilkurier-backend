@@ -73,17 +73,17 @@ public class Information extends PanacheEntity {
 
   @Override
   public String toString() {
-    return "Information{" +
-        "weight=" + weight +
-        ", timestamp=" + timestamp +
-        ", title='" + title + '\'' +
-        ", guid='" + guid + '\'' +
-        ", author='" + author + '\'' +
-        ", link='" + link + '\'' +
-        ", picture='" + picture + '\'' +
-        ", message='" + message + '\'' +
-        ", textonlymessage='" + textonlymessage + '\'' +
-        ", feed=" + feed +
-        '}';
+    return "Information{"
+        + "weight=" + weight
+        + ", timestamp=" + timestamp
+        + ", title='" + title + '\''
+        + ", guid='" + guid + '\''
+        + ", author='" + author + '\''
+        + ", link='" + link + '\''
+        + ", picture='" + picture + '\''
+        + ", message='" + message + '\''
+        + ", textonlymessage='" + textonlymessage + '\''
+        + ", feed=" + feed
+        + '}';
   }
 }

@@ -190,12 +190,12 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.4.2.2</version>
+                <version>4.5.0.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
                         <artifactId>spotbugs</artifactId>
-                        <version>4.5.0</version>
+                        <version>4.5.0.0</version>
                     </dependency>
                 </dependencies>
                 <configuration>
@@ -204,29 +204,9 @@
                     <threshold>Low</threshold>
                     <plugins>
                         <plugin>
-                            <groupId>com.github.spotbugs</groupId>
-                            <artifactId>spotbugs-maven-plugin</artifactId>
-                            <version>4.5.0.0</version>
-                            <dependencies>
-                                <dependency>
-                                    <groupId>com.github.spotbugs</groupId>
-                                    <artifactId>spotbugs</artifactId>
-                                    <version>4.5.0</version>
-                                </dependency>
-                            </dependencies>
-                            <configuration>
-                                <maxAllowedViolations>0</maxAllowedViolations>
-                                <effort>Max</effort>
-                                <threshold>Low</threshold>
-                                <plugins>
-                                    <plugin>
-                                        <groupId>com.h3xstream.findsecbugs</groupId>
-                                        <artifactId>findsecbugs-plugin</artifactId>
-                                        <version>1.11.0</version>
-                                    </plugin>
-                                </plugins>
-                            </configuration>
-
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>1.11.0</version>
                         </plugin>
                     </plugins>
                 </configuration>

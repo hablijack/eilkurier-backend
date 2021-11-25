@@ -48,17 +48,17 @@ public class Feed extends PanacheEntity {
 
   @Override
   public String toString() {
-    return "Feed{" +
-        "url='" + url + '\'' +
-        ", name='" + name + '\'' +
-        ", description='" + description + '\'' +
-        ", picture='" + picture + '\'' +
-        ", pictureContentType='" + pictureContentType + '\'' +
-        ", category=" + category +
-        ", information=" + information +
-        ", language='" + language + '\'' +
-        ", copyright='" + copyright + '\'' +
-        '}';
+    return "Feed{"
+        + "url='" + url + '\''
+        + ", name='" + name + '\''
+        + ", description='" + description + '\''
+        + ", picture='" + picture + '\''
+        + ", pictureContentType='" + pictureContentType + '\''
+        + ", category=" + category
+        + ", information=" + information
+        + ", language='" + language + '\''
+        + ", copyright='" + copyright + '\''
+        + '}';
   }
 
   public void persistIfNotExist() {

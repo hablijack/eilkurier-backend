@@ -25,6 +25,10 @@ import org.jsoup.safety.Whitelist;
 @ApplicationScoped
 public class FeedService {
 
+  public static final int MESSAGE_MAX_LENGTH = 1200;
+  public static final int MESSAGE_CUT_LENGTH = 1195;
+  public static final int MESSAGE_MIN_LENGTH = 20;
+
   private static final Logger LOGGER = Logger.getLogger(FeedService.class.getName());
 
   @Transactional
@@ -67,56 +71,54 @@ public class FeedService {
         } else if (localPart.contains(RSSTag.ENCLOSURE.getName())) {
           item.enclosure = getCharacterData(event, eventReader);
         }
-      } else if (event.isEndElement()) {
-        if (event.asEndElement().getName().getLocalPart().contains(RSSTag.ITEM.getName())) {
-          if (item.hasGUID() && !Information.existsByGuidAndFeed(item.guid, feed)) {
-            Information info = new Information();
-            info.feed = feed;
-            if (item.author == null || item.author.isEmpty()) {
-              info.author = feed.name;
-            } else {
-              info.author = item.author;
-            }
-            String message = "";
-            if (item.hasContent()) {
-              message = item.content;
-            } else {
-              message = item.description;
-            }
-            if (message.length() > 1200) {
-              message = truncateMessageBody(message, 1195) + " (... weiterlesen ...)";
-            } else if (message.length() < 20) {
-              continue;
-            }
-            info.message = message;
-            if (item.hasEnclusure()) {
-              info.picture = item.enclosure;
-            } else {
-              Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
-              Matcher imageMatcher = regexImagePattern.matcher(message);
-              if (imageMatcher.find()) {
-                if (imageMatcher.group(1).contains("http")) {
-                  info.picture = imageMatcher.group(1);
-                }
-              }
-            }
-            info.textonlymessage = Jsoup.clean(message, Whitelist.simpleText());
-            info.guid = item.guid;
-            info.link = item.link;
-            info.title = item.title;
-            try {
-              info.timestamp = item.getPubdate();
-            } catch (Exception ex) {
-              info.timestamp = new Date();
-              LOGGER.error(item.pubdate);
-            }
-            info.feed.language = item.language;
-            info.feed.copyright = item.copyright;
-            info.persist();
+      } else if (event.isEndElement()
+          && event.asEndElement().getName().getLocalPart().contains(RSSTag.ITEM.getName())) {
+
+        if (item.hasGUID() && !Information.existsByGuidAndFeed(item.guid, feed)) {
+          Information info = new Information();
+          info.feed = feed;
+          if (item.author == null || item.author.isEmpty()) {
+            info.author = feed.name;
+          } else {
+            info.author = item.author;
           }
-          event = eventReader.nextEvent();
-          continue;
+          String message = "";
+          if (item.hasContent()) {
+            message = item.content;
+          } else {
+            message = item.description;
+          }
+          if (message.length() > MESSAGE_MAX_LENGTH) {
+            message = truncateMessageBody(message, MESSAGE_CUT_LENGTH) + " (... weiterlesen ...)";
+          } else if (message.length() < MESSAGE_MIN_LENGTH) {
+            continue;
+          }
+          info.message = message;
+          if (item.hasEnclusure()) {
+            info.picture = item.enclosure;
+          } else {
+            Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
+            Matcher imageMatcher = regexImagePattern.matcher(message);
+            if (imageMatcher.find() && imageMatcher.group(1).contains("http")) {
+              info.picture = imageMatcher.group(1);
+            }
+          }
+          info.textonlymessage = Jsoup.clean(message, Whitelist.simpleText());
+          info.guid = item.guid;
+          info.link = item.link;
+          info.title = item.title;
+          try {
+            info.timestamp = item.getPubdate();
+          } catch (Exception ex) {
+            info.timestamp = new Date();
+            LOGGER.error(item.pubdate);
+          }
+          info.feed.language = item.language;
+          info.feed.copyright = item.copyright;
+          info.persist();
         }
+        event = eventReader.nextEvent();
+        continue;
       }
     }
   }
@@ -155,6 +157,8 @@ public class FeedService {
           if (inTag) {
             inString = !inString;
           }
+          break;
+        default:
           break;
       }
     }
