@@ -4,9 +4,11 @@ import de.hablijack.eilkurier.entity.Feed;
 import de.hablijack.eilkurier.entity.Information;
 import de.hablijack.eilkurier.entity.RssItem;
 import de.hablijack.eilkurier.enumeration.RSSTag;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.quarkus.vertx.ConsumeEvent;
 import java.io.IOException;
-import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
 import java.net.URL;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -33,11 +35,23 @@ public class FeedService {
 
   @Transactional
   @ConsumeEvent(value = "fetch_feed_information", blocking = true)
+  @SuppressFBWarnings(value = "URLCONNECTION_SSRF_FD", justification = "we validated our URLs often enough...")
   public void fetchFeedInformation(Feed feed) throws IOException, XMLStreamException {
     RssItem item = new RssItem();
     XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-    InputStream in = new URL(feed.url).openStream();
-    XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+    inputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
+    inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+    URL url = new URL(feed.url);
+    InetAddress inetAddress = InetAddress.getByName(url.getHost());
+    if (!url.getProtocol().startsWith("https") || inetAddress.isAnyLocalAddress() || inetAddress.isLoopbackAddress() ||
+        inetAddress.isLinkLocalAddress()) {
+      throw new IOException("Attack dected!");
+    }
+
+    HttpURLConnection conn = (HttpURLConnection) (url.openConnection());
+    conn.setInstanceFollowRedirects(false);
+    conn.connect();
+    XMLEventReader eventReader = inputFactory.createXMLEventReader(conn.getInputStream());
     while (eventReader.hasNext()) {
       XMLEvent event = eventReader.nextEvent();
       if (event.isStartElement()) {
@@ -49,27 +63,27 @@ public class FeedService {
           if (item.isFeedHeader) {
             item.isFeedHeader = false;
           }
-          event = eventReader.nextEvent();
+          //event = eventReader.nextEvent();
         } else if (localPart.contains(RSSTag.TITLE.getName())) {
-          item.title = getCharacterData(event, eventReader);
+          item.title = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.DESCRIPTION.getName())) {
-          item.description = getCharacterData(event, eventReader);
+          item.description = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.LINK.getName())) {
-          item.link = getCharacterData(event, eventReader);
+          item.link = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.GUID.getName())) {
-          item.guid = getCharacterData(event, eventReader);
+          item.guid = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.LANGUAGE.getName())) {
-          item.language = getCharacterData(event, eventReader);
+          item.language = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.AUTHOR.getName())) {
-          item.author = getCharacterData(event, eventReader);
+          item.author = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.PUB_DATE.getName())) {
-          item.pubdate = getCharacterData(event, eventReader);
+          item.pubdate = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.COPYRIGHT.getName())) {
-          item.copyright = getCharacterData(event, eventReader);
+          item.copyright = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.CONTENT.getName())) {
-          item.content = getCharacterData(event, eventReader);
+          item.content = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.ENCLOSURE.getName())) {
-          item.enclosure = getCharacterData(event, eventReader);
+          item.enclosure = getCharacterData(eventReader);
         }
       } else if (event.isEndElement()
           && event.asEndElement().getName().getLocalPart().contains(RSSTag.ITEM.getName())) {
@@ -117,20 +131,20 @@ public class FeedService {
           info.feed.copyright = item.copyright;
           info.persist();
         }
-        event = eventReader.nextEvent();
-        continue;
+        //event = eventReader.nextEvent();
+        //continue;
       }
     }
+    conn.disconnect();
   }
 
-  private String getCharacterData(XMLEvent event, XMLEventReader eventReader)
-      throws XMLStreamException {
-    String result = "";
-    event = eventReader.nextEvent();
+  private String getCharacterData(XMLEventReader eventReader) throws XMLStreamException {
+    XMLEvent event = eventReader.nextEvent();
     if (event instanceof Characters) {
-      result = event.asCharacters().getData();
+      return event.asCharacters().getData();
+    } else {
+      return "";
     }
-    return result;
   }
 
   private String truncateMessageBody(String input, int size) {
