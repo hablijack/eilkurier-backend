@@ -37,14 +37,15 @@ jobs:
           command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
       - run:
-          name: DockerHUB login
-          command: echo ${DOCKER_PASS} | docker login --username ${DOCKER_USER} --password-stdin
-      - run:
           name: Build Docker Image
-          command: docker build -f ./src/main/docker/Dockerfile.native -t hablijack/eilkurier-backend:latest .
+          command: docker build -f ./src/main/docker/Dockerfile.native -t registry.heroku.com/eilkurier-backend/web .
       - run:
-          name: Push to DockerHUB
-          command: docker push hablijack/eilkurier-backend:latest
+          name: Push Docker image to Heroku
+          command: |
+            docker push registry.heroku.com/eilkurier-backend/web
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+            heroku container:release web
 
 workflows:
   version: 2
