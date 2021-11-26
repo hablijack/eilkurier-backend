@@ -1,28 +1,27 @@
-package de.hablijack.eilkurier.service;
+package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Feed;
-import io.quarkus.scheduler.Scheduled;
 import io.vertx.mutiny.core.eventbus.EventBus;
-import java.io.IOException;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.xml.stream.XMLStreamException;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import org.jboss.logging.Logger;
 
+//@RolesAllowed("user")
+@Path("api")
 @ApplicationScoped
-public class CronService {
+public class FeedResource {
 
-  private static final Logger LOGGER = Logger.getLogger(CronService.class.getName());
-
-  @Inject
-  FeedService feedService;
+  private static final Logger LOGGER = Logger.getLogger(FeedResource.class.getName());
 
   @Inject
   EventBus eventBus;
 
-  @Scheduled(every = "10m")
-  public void fetchInfos() throws XMLStreamException, IOException {
+  @POST
+  @Path("feeds/import")
+  public void startImport() {
     LOGGER.info("Starting to fetch Feeds...");
     List<Feed> allFeeds = Feed.listAll();
     for (Feed feed : allFeeds) {

@@ -36,6 +36,7 @@ public class FeedService {
   @Transactional
   @ConsumeEvent(value = "fetch_feed_information", blocking = true)
   @SuppressFBWarnings(value = "URLCONNECTION_SSRF_FD", justification = "we validated our URLs often enough...")
+  // TODO: Organize Method with private helpers
   public void fetchFeedInformation(Feed feed) throws IOException, XMLStreamException {
     RssItem item = new RssItem();
     XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -63,7 +64,6 @@ public class FeedService {
           if (item.isFeedHeader) {
             item.isFeedHeader = false;
           }
-          //event = eventReader.nextEvent();
         } else if (localPart.contains(RSSTag.TITLE.getName())) {
           item.title = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.DESCRIPTION.getName())) {
@@ -103,6 +103,7 @@ public class FeedService {
             message = item.description;
           }
           if (message.length() > MESSAGE_MAX_LENGTH) {
+            // TODO: implement via Flag
             message = truncateMessageBody(message, MESSAGE_CUT_LENGTH) + " (... weiterlesen ...)";
           } else if (message.length() < MESSAGE_MIN_LENGTH) {
             continue;
@@ -131,8 +132,6 @@ public class FeedService {
           info.feed.copyright = item.copyright;
           info.persist();
         }
-        //event = eventReader.nextEvent();
-        //continue;
       }
     }
     conn.disconnect();
