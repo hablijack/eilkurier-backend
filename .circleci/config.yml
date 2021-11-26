@@ -7,9 +7,15 @@ jobs:
     resource_class: medium
     steps:
       - checkout
-      - run: ./mvnw clean compile spotbugs:check
-      - run: ./mvnw clean compile pmd:check
-      - run: ./mvnw clean compile checkstyle:check
+      - run:
+          name: Spotbugs
+          command: ./mvnw clean compile spotbugs:check
+      - run:
+          name: PMD
+          command: ./mvnw clean compile pmd:check
+      - run:
+          name: Checkstyle
+          command: ./mvnw clean compile checkstyle:check
 
   build:
     machine:
@@ -20,21 +26,31 @@ jobs:
       GRAALVM_HOME: /home/circleci/repo/.graalvm
     steps:
       - checkout
-      - run: curl https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java11-linux-amd64-21.3.0.tar.gz -O -J -L && tar xfz graalvm-ce-java11-linux-amd64-21.3.0.tar.gz && mv graalvm-ce-java11-21.3.0 .graalvm && rm graalvm-ce-java11-linux-amd64-21.3.0.tar.gz
-      - run: $GRAALVM_HOME/bin/gu install native-image
       - run:
+          name: Install GraalVM
+          command: curl https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.3.0/graalvm-ce-java11-linux-amd64-21.3.0.tar.gz -O -J -L && tar xfz graalvm-ce-java11-linux-amd64-21.3.0.tar.gz && mv graalvm-ce-java11-21.3.0 .graalvm && rm graalvm-ce-java11-linux-amd64-21.3.0.tar.gz
+      - run:
+          name: Install native-image
+          command: $GRAALVM_HOME/bin/gu install native-image
+      - run:
+          name: Build (Native)
           command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
-      - run: docker build -f ./src/main/docker/Dockerfile.native .
-      - heroku/install:
-      - run: heroku container:login
-      - heroku/push-docker-image:
-          process-types: web
-      - heroku/release-docker-image:
-          process-types: web
-
-orbs:
-  heroku: circleci/heroku@1.2.6
+      - run:
+          name: Build and push Docker Image to Heroku
+          command: |
+            docker build -f ./src/main/docker/Dockerfile.native -t registry.heroku.com/$HEROKU_APP_NAME/web .
+            docker login -username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
+            docker push registry.heroku.com/$HEROKU_APP_NAME/web
+      - run:
+          name: Install Heroku CLI
+          command: sudo curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Heroku Login
+          command: heroku container:login
+      - run:
+          name: Release Docker image to Heroku
+          command: heroku container:release web
 
 workflows:
   version: 2
