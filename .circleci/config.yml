@@ -24,7 +24,6 @@ jobs:
     working_directory: ~/repo
     environment:
       GRAALVM_HOME: /home/circleci/repo/.graalvm
-      HEROKU_API_KEY: ${HEROKU_TOKEN}
     steps:
       - checkout
       - run:
