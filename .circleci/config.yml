@@ -50,7 +50,8 @@ jobs:
           command: heroku container:login
       - run:
           name: Release Docker image to Heroku
-          command: heroku container:release --app $HEROKU_APP_NAME web
+          command: |
+            heroku container:release --app $HEROKU_APP_NAME web
 
 workflows:
   version: 2
