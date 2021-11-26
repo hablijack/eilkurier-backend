@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/hablijack/eilkurier-backend/tree/main.svg?style=svg)](https://circleci.com/gh/hablijack/eilkurier-backend/tree/main)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/heroku/webhooks-demo)
+![Heroku](https://pyheroku-badge.herokuapp.com/?app=eilkurier-backend&style=flat)
 
 # eilkurier-backend
 
