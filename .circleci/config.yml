@@ -43,8 +43,8 @@ jobs:
             docker build -f ./src/main/docker/Dockerfile.native -t registry.heroku.com/eilkurier-backend/web .
             docker push registry.heroku.com/eilkurier-backend/web
       - run:
-          - name: Install Heroku CLI
-            command: sudo curl https://cli-assets.heroku.com/install.sh | sh
+          name: Install Heroku CLI
+          command: sudo curl https://cli-assets.heroku.com/install.sh | sh
       - run:
           name: Release Application
           command: |
