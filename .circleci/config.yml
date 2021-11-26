@@ -24,6 +24,7 @@ jobs:
     working_directory: ~/repo
     environment:
       GRAALVM_HOME: /home/circleci/repo/.graalvm
+      HEROKU_API_KEY: ${HEROKU_TOKEN}
     steps:
       - checkout
       - run:
@@ -37,14 +38,17 @@ jobs:
           command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
       - run:
-          name: Build Docker Image
-          command: docker build -f ./src/main/docker/Dockerfile.native -t registry.heroku.com/eilkurier-backend/web .
-      - run:
-          name: Push Docker image to Heroku
+          name: Build and push Docker Image to Heroku
           command: |
+            docker build -f ./src/main/docker/Dockerfile.native -t registry.heroku.com/eilkurier-backend/web .
             docker push registry.heroku.com/eilkurier-backend/web
-            sudo curl https://cli-assets.heroku.com/install.sh | sh
-            HEROKU_API_KEY=${HEROKU_TOKEN} heroku container:login
+      - run:
+          - name: Install Heroku CLI
+            command: sudo curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Release Application
+          command: |
+            heroku container:login
             heroku container:release web
 
 workflows:
