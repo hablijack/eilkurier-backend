@@ -28,6 +28,10 @@ USER 1001
 
 RUN /work/bootstrap.sh
 
+
+RUN echo ${DATABASE_URL}
+RUN echo ${JDBC_DATABASE_URL}
+
 CMD [ "./application",  \
     "-Dquarkus.http.host=0.0.0.0",  \
     "-Dquarkus.http.port=${PORT}", \
