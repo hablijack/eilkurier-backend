@@ -21,7 +21,7 @@ RUN chown 1001 /work \
     && chown 1001:root /work
 COPY --chown=1001:root target/*-runner /work/application
 
-ADD bootstrap.sh /work
+COPY --chown=1001:root --chmod=0755 src/main/docker/bootstrap.sh /work/bootstrap.sh
 
 USER 1001
 
