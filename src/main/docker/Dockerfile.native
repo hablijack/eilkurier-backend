@@ -21,10 +21,16 @@ RUN chown 1001 /work \
     && chown 1001:root /work
 COPY --chown=1001:root target/*-runner /work/application
 
+ADD bootstrap.sh /work
+
 USER 1001
+
+RUN /work/bootstrap.sh
 
 CMD [ "./application",  \
       "-Dquarkus.http.host=0.0.0.0",  \
       "-Dquarkus.http.port=${PORT}", \
-      "-Dquarkus.datasource.jdbc.url=jdbc:${DATABASE_URL}" \
+      "-Dquarkus.datasource.jdbc.url=${JDBC_DATABASE_URL}" \
+      "-Dquarkus.datasource.jdbc.username=${JDBC_DATABASE_USERNAME}" \
+      "-Dquarkus.datasource.jdbc.password=${JDBC_DATABASE_PASSWORD}" \
 ]
