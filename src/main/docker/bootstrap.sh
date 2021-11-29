@@ -90,9 +90,6 @@ set_jdbc_url() {
       eval "export ${environment_variables_prefix}_USERNAME=\"${username}\""
       eval "export ${environment_variables_prefix}_PASSWORD=\"${password}\""
     fi
-    echo $JDBC_DATABASE_URL
-    echo $JDBC_DATABASE_USERNAME
-    echo $JDBC_DATABASE_PASSWORD
   fi
 }
 
@@ -124,3 +121,5 @@ fi
 for database_url_variable in $(env | awk -F "=" '{print $1}' | grep "HEROKU_POSTGRESQL_.*_URL"); do
   set_jdbc_url "$(eval echo "\$${database_url_variable}")" "${database_url_variable//_URL/}_JDBC"
 done
+
+exec "$@"

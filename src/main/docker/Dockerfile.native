@@ -31,8 +31,8 @@ USER 1001
 
 ENTRYPOINT ["/work/bootstrap.sh"]
 
-CMD [ "./application",  \
-    "-Dquarkus.http.host=0.0.0.0",  \
+CMD [ "./application", \
+    "-Dquarkus.http.host=0.0.0.0", \
     "-Dquarkus.http.port=${PORT}", \
     "-Dquarkus.datasource.jdbc.url=${JDBC_DATABASE_URL}", \
     "-Dquarkus.datasource.jdbc.username=${JDBC_DATABASE_USERNAME}", \
