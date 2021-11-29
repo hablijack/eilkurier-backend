@@ -90,6 +90,9 @@ set_jdbc_url() {
       eval "export ${environment_variables_prefix}_USERNAME=\"${username}\""
       eval "export ${environment_variables_prefix}_PASSWORD=\"${password}\""
     fi
+    echo $JDBC_DATABASE_URL
+    echo $JDBC_DATABASE_USERNAME
+    echo $JDBC_DATABASE_PASSWORD
   fi
 }
 
