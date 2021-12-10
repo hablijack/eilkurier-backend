@@ -1,5 +1,6 @@
 [![CircleCI](https://circleci.com/gh/hablijack/eilkurier-backend/tree/main.svg?style=svg)](https://circleci.com/gh/hablijack/eilkurier-backend/tree/main)
 ![Heroku](https://pyheroku-badge.herokuapp.com/?app=eilkurier-backend&style=flat)
+[![CodeScene general](https://codescene.io/images/analyzed-by-codescene-badge.svg)](https://codescene.io/projects/21428)
 
 # eilkurier-backend
 
