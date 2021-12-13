@@ -1,5 +1,6 @@
 package de.hablijack.eilkurier.entity;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import java.util.Optional;
 import javax.persistence.Column;
@@ -17,6 +18,7 @@ public class User extends PanacheEntity {
   public String email;
 
   @Column(name = "picture_url", nullable = false)
+  @JsonAlias({"picture"})
   public String pictureUrl;
 
   public static Optional<User> findByEmailOptional(String email) {
