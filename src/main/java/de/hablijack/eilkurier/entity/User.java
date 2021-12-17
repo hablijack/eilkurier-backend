@@ -21,6 +21,9 @@ public class User extends PanacheEntity {
   @JsonAlias({"picture"})
   public String pictureUrl;
 
+  @Column(name = "wizard_completed")
+  public boolean wizardCompleted;
+
   public static Optional<User> findByEmailOptional(String email) {
     return find("email = ?1", email).firstResultOptional();
   }
