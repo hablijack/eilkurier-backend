@@ -23,7 +23,7 @@ public class FeedResource {
   @GET
   @Path("feeds")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
-  public void startImport() {
+  public List<Feed> getAllFeeds() {
     LOGGER.info("Starting to fetch Feeds...");
     return Feed.listAll();
   }
