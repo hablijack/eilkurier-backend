@@ -21,6 +21,14 @@ public class FeedResource {
   EventBus eventBus;
 
   @GET
+  @Path("feeds")
+  @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
+  public void startImport() {
+    LOGGER.info("Starting to fetch Feeds...");
+    return Feed.listAll();
+  }
+
+  @GET
   @Path("feeds/import")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   public void startImport() {
