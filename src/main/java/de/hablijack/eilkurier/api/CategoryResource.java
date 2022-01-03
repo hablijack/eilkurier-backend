@@ -24,7 +24,7 @@ public class CategoryResource {
   @GET
   @Path("categories")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
-  public List<Feed> getAllCategories() {
+  public List<Category> getAllCategories() {
     LOGGER.info("Starting to fetch Categories...");
     return Category.listAll();
   }
