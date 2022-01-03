@@ -22,7 +22,7 @@ public class User extends PanacheEntity {
   public String pictureUrl;
 
   @Column(name = "wizard_completed", columnDefinition = "BOOLEAN DEFAULT false")
-  public boolean wizardCompleted = false;
+  public Boolean wizardCompleted = false;
 
   public static Optional<User> findByEmailOptional(String email) {
     return find("email = ?1", email).firstResultOptional();
