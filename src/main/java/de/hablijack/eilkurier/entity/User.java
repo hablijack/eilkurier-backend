@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "user", schema = "eilkurier")
@@ -22,6 +23,7 @@ public class User extends PanacheEntity {
   public String pictureUrl;
 
   @Column(name = "wizard_completed")
+  @ColumnDefault("false")
   public boolean wizardCompleted;
 
   public static Optional<User> findByEmailOptional(String email) {
