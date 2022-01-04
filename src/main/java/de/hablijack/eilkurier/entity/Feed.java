@@ -2,6 +2,7 @@ package de.hablijack.eilkurier.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,6 +47,16 @@ public class Feed extends PanacheEntity {
     this.category = category;
   }
 
+  public static List<Feed> finByCategoryIds(List<Long> categoryIds) {
+    return find("category.id in (?1)", categoryIds).list();
+  }
+
+  public void persistIfNotExist() {
+    if (find("url = ?1", url).count() == 0) {
+      this.persist();
+    }
+  }
+
   @Override
   public String toString() {
     return "Feed{"
@@ -60,11 +71,4 @@ public class Feed extends PanacheEntity {
         + ", copyright='" + copyright + '\''
         + '}';
   }
-
-  public void persistIfNotExist() {
-    if (find("url = ?1", url).count() == 0) {
-      this.persist();
-    }
-  }
-
 }

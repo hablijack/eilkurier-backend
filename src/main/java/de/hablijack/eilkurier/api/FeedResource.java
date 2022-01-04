@@ -8,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")
@@ -23,9 +24,9 @@ public class FeedResource {
   @GET
   @Path("categories/feeds")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
-  public List<Feed> getAllFeeds() {
-    LOGGER.info("Starting to fetch Feeds...");
-    return Feed.listAll();
+  public List<Feed> getFeedsByCategoryIds(@QueryParam("categoryIds") List<Long> categoryIds) {
+    LOGGER.info("Try to find Categories for Feeds: " + categoryIds);
+    return Feed.finByCategoryIds(categoryIds);
   }
 
   @GET
