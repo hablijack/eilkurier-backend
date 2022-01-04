@@ -24,7 +24,7 @@ public class FeedResource {
   @GET
   @Path("categories/feeds")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
-  public List<Feed> getFeedsByCategoryIds(@QueryParam("categoryIds") List<Long> categoryIds) {
+  public List<Feed> getFeedsByCategoryIds(@QueryParam("categoryId") List<Long> categoryIds) {
     LOGGER.info("Try to find Categories for Feeds: " + categoryIds);
     return Feed.finByCategoryIds(categoryIds);
   }
