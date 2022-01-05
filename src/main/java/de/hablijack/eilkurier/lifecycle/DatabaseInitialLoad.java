@@ -35,36 +35,40 @@ public class DatabaseInitialLoad {
         "https://1.f.ix.de/icons/ho/heise_online_min.gif", "image/gif",
         "https://www.heise.de/newsticker/heise-atom.xml", it).persistIfNotExist();
     new Feed("OMG! Ubuntu!", "Ubuntu News",
-        "http://www.omgubuntu.co.uk/wp-content/themes/omgubuntu-theme-3.6.1/images/logo.png", "image/png",
+        "https://www.omgubuntu.co.uk/wp-content/uploads/2020/04/cropped-ava-tar-32x32.png", "image/png",
         "http://feeds.feedburner.com/d0od?format=xml", it).persistIfNotExist();
-    new Feed("Winfuture", "Winfuture News", "https://i.wfcdn.de/5/header_left.jpg", "image/jpg",
+    new Feed("Winfuture", "Winfuture News", "https://i.wfcdn.de/5/oben_logo_left_340x68_x1.png", "image/jpg",
         "https://static.winfuture.de/feeds/WinFuture-News-rss2.0.xml", it).persistIfNotExist();
     new Feed("ZDNet", "IT-News und Hintergrundartikel für IT-Manager",
-        "http://www.zdnet.de/wp-content/themes/korasa-zdnet-de/assets/images/logos/zdnet-de-gray-drp.png", "image/png",
+        "https://www.zdnet.de/wp-content/themes/korasa-zdnet-de/assets/images/logos/zdnet-de-gray-drp.png", "image/png",
         "https://www.zdnet.de/feed/", it).persistIfNotExist();
     new Feed("t3n digital pioneers", "t3n digital pioneers - News",
-        "https://t3n.de/_Resources/Static/Packages/Yeebase.t3nDe/Images/Rss/logo.png", "image/png",
+        "https://storage.googleapis.com/t3n-de/assets/t3n/2018/images/icons/t3n-rss-feed-600x600.png", "image/png",
         "https://t3n.de/rss.xml", it).persistIfNotExist();
     new Feed("Engadget", "Gadgets und elektronische Geräte",
-        "http://de.engadget.com/assets/images/Engadget_DE_Black.png", "image/png", "https://www.engadget.com/rss.xml",
+        "https://www.parsintl.com/wp-content/uploads/2018/09/m-engadget.jpg", "image/png",
+        "https://www.engadget.com/rss.xml",
         it).persistIfNotExist();
     new Feed("Adafruit Blog", "electronics, open source hardware, hacking and more...",
-        "https://cdn-blog.adafruit.com/uploads/2020/04/logo_small@2x.png", "image/png",
+        "https://cdn-shop.adafruit.com/static/favicon-196x196.png", "image/png",
         "https://blog.adafruit.com/feed/", it).persistIfNotExist();
     // #############################################################################################################
     Category diy =
         new Category("DIY, Maker, Heimwerken, Basteln", "Anleitungen und Beschreibungen von selbstgebauten Projekten.");
     diy.persistIfNotExist();
     new Feed("Lifehacker", "Tips, tricks and downloads for getting things done",
-        "https://t3n.de/_Resources/Static/Packages/Yeebase.t3nDe/Images/Rss/logo.png", "image/png",
+        "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_80,q_80,w_80/u0939doeuioaqhspkjyc.png",
+        "image/png",
         "https://lifehacker.com/rss", diy).persistIfNotExist();
-    new Feed("Heise Make", "Kreativ mit Technik", "https://1.f.ix.de/make/icons/make_logo.png", "image/png",
+    new Feed("Heise Make", "Kreativ mit Technik", "https://www.heise.de/make/icons/apple-touch-icon-152.png",
+        "image/png",
         "https://www.heise.de/make/rss/hardware-hacks-atom.xml", diy).persistIfNotExist();
     new Feed("Hackaday", "Fresh hacks every day",
-        "https://secure.gravatar.com/blavatar/5560f98f805877b0e332f191cb9e0af3?s=96&d=https%3A%2F%2Fs2.wp.com%2Fi%2Fbuttonw-com.png",
+        "https://hackaday.com/wp-content/themes/hackaday-2/img/hackaday-logo_1024x1024.png?v=3",
         "image/png", "https://hackaday.com/feed/", diy).persistIfNotExist();
     new Feed("Adafruit Learning", "Adafruit Learning System | Latest Published Guides",
-        "https://d2794n4cyhr13z.cloudfront.net/assets/c164befb381ecf49c07e8b058f6894e6.png", "image/png",
+        "https://learn.adafruit.com/assets/adafruit_favicon-d675616eb86845a7dba9e0f82b02bab9dbc195053d6f2adc8741e42ca351d2fe.svg",
+        "image/svg",
         "https://learn.adafruit.com/feed", diy).persistIfNotExist();
     // #############################################################################################################
     Category music = new Category("Musik, Band, Instrumente", "Nachrichten- und Artikelquellen über das Musizieren.");
@@ -73,11 +77,11 @@ public class DatabaseInitialLoad {
         "https://www.gitarrebass.de/wp-content/uploads/2015/04/GITARRE-BASS_Logo.png", "image/png",
         "https://www.gitarrebass.de/feed/", music).persistIfNotExist();
     new Feed("Guitar", "Magazin für Gitarristen und Bassisten",
-        "https://www.guitar.de/fileadmin/templates/img/guitar_logo_500.png", "image/png",
+        "https://guitar.de/images/touchicons/apple-touch-icon-180x180.png", "image/png",
         "https://music-product-news.de/gitarre-und-bass?format=feed&type=rss", music).persistIfNotExist();
-    new Feed("Keys", "Musik und Computer", "https://www.keys.de/fileadmin/templates/keys/img/KEYS_Logo.png",
+    new Feed("Keys", "Musik und Computer", "https://www.keys.de/images/touchicons/apple-touch-icon-180x180.png",
         "image/png", "https://www.keys.de/?format=feed&type=rss", music).persistIfNotExist();
-    new Feed("SOUNDCHECK", "Das Bandmagazin", "https://www.soundcheck.de/fileadmin/templates/img/SC_Logo_290.png",
+    new Feed("SOUNDCHECK", "Das Bandmagazin", "https://www.soundcheck.de/images/Logos/soundcheck-logo_web.png",
         "image/png", "https://www.soundcheck.de/?format=feed&type=rss", music).persistIfNotExist();
     // #############################################################################################################
     Category news = new Category("Nachrichten", "Schlagzeilen und Neuigkeiten.");
@@ -89,7 +93,8 @@ public class DatabaseInitialLoad {
         news).persistIfNotExist();
     new Feed("SPIEGEL ONLINE",
         "Deutschlands führende Nachrichtenseite. Alles Wichtige aus Politik, Wirtschaft, Sport, Kultur, Wissenschaft, Technik und mehr.",
-        "http://www.spiegel.de/static/sys/logo_120x61.gif", "image/gif", "https://www.spiegel.de/index.rss",
+        "https://www.spiegel.de/public/spon/images/logos/der-spiegel-h60.png", "image/gif",
+        "https://www.spiegel.de/index.rss",
         news).persistIfNotExist();
     new Feed("taz.de",
         "Kritischer, unabhängiger Journalismus der linken Nachrichtenseite taz: Analysen, Hintergründe, Kommentare, Interviews, Reportagen. Genossenschaft seit 1992.",
@@ -115,9 +120,16 @@ public class DatabaseInitialLoad {
         "die erste Adresse für Nachrichten und Information: An 365 Tagen im Jahr, rund um die Uhr aktualisiert - die wichtigsten News des Tages.",
         "https://id.sueddeutsche.de/img/sz_logo.png", "image/png", "https://rss.sueddeutsche.de/rss/Eilmeldungen",
         news).persistIfNotExist();
-    new Feed("Münchner Merkur", "", "", "image/png", "https://www.merkur.de/rssfeed.rdf", news).persistIfNotExist();
-    new Feed("Welt: Top-News", "", "", "image/png", "https://www.welt.de/feeds/topnews.rss", news).persistIfNotExist();
-    new Feed("Welt: Alle Themen", "", "", "image/png", "https://www.welt.de/feeds/latest.rss",
+    new Feed("Münchner Merkur",
+        "Auf Merkur.de lesen Sie aktuelle Nachrichten & Meldungen aus aller Welt: Von Politik über Wirtschaft zu Verbraucher & Sport. Jetzt informieren!",
+        "https://www.merkur.de/static/merkur-de/img/basis/responsive/logo.png", "image/png",
+        "https://www.merkur.de/rssfeed.rdf", news).persistIfNotExist();
+    new Feed("Welt: Top-News", "Nachrichten - Aktuelle Nachrichten von WELT", "https://www.welt.de/rss-logo.png",
+        "image/png",
+        "https://www.welt.de/feeds/topnews.rss", news).persistIfNotExist();
+    new Feed("Welt: Alle Themen", "Nachrichten - Aktuelle Nachrichten von WELT", "https://www.welt.de/rss-logo.png",
+        "image/png",
+        "https://www.welt.de/feeds/latest.rss",
         news).persistIfNotExist();
     // #############################################################################################################
     Category regionalNews = new Category("Regionale Nachrichten", "Nachrichten aus der Region.");
@@ -177,7 +189,7 @@ public class DatabaseInitialLoad {
         "https://www.onetz.de/sites/all/themes/dnt_onet/images/titel-onetz.svg", "image/svg",
         "https://www.onetz.de/themen/oton/rss.xml", regionalNews).persistIfNotExist();
     new Feed("Stadt Waldershof", "Aktuelles aus der Stadt Waldershof in der Oberpfalz",
-        "https://www.waldershof.de/wp-content/uploads/2015/03/logo_waldershof_retina_2.png", "image/png",
+        "https://www.waldershof.de/wp-content/uploads/2020/07/cropped-WALDERSHOF_Logo-1-180x180.png", "image/png",
         "https://www.waldershof.de/feed/", regionalNews).persistIfNotExist();
     new Feed("Frankenpost: Topmeldungen", "Topaktuelles aus Franken",
         "https://www.frankenpost.de/www/frankenpost/_responsive/images/logo.svg", "image/svg",
