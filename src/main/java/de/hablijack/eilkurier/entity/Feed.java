@@ -30,6 +30,10 @@ public class Feed extends PanacheEntity {
   @OneToMany(fetch = FetchType.LAZY)
   @OrderBy("timestamp DESC")
   public Set<Information> information;
+
+  @OneToMany(fetch = FetchType.LAZY)
+  public Set<Subscription> subscriptions;
+
   public String language;
   public String copyright;
 

@@ -3,8 +3,11 @@ package de.hablijack.eilkurier.entity;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import java.util.Optional;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +26,9 @@ public class User extends PanacheEntity {
 
   @Column(name = "wizard_completed", columnDefinition = "BOOLEAN DEFAULT false")
   public Boolean wizardCompleted = false;
+  
+  @OneToMany(fetch = FetchType.LAZY)
+  public Set<Subscription> subscriptions;
 
   public static Optional<User> findByEmailOptional(String email) {
     return find("email = ?1", email).firstResultOptional();
