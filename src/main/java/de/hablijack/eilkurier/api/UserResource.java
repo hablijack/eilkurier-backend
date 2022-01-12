@@ -5,8 +5,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.Optional;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")
@@ -18,6 +20,7 @@ public class UserResource {
 
   @POST
   @Path("users")
+  @Consumes(MediaType.APPLICATION_JSON)
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   @Transactional
   public User createIfNotExists(User user) {
