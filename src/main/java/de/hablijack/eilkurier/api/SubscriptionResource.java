@@ -17,7 +17,7 @@ public class SubscriptionResource {
   private static final Logger LOGGER = Logger.getLogger(SubscriptionResource.class.getName());
 
   @POST
-  @Path("subscriptions/bulk-subscribe")
+  @Path("categories/feeds/subscriptions/bulk")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   @Transactional
   public void createSubscription(List<Subscription> subscriptions) {
