@@ -1,6 +1,7 @@
 package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Subscription;
+import de.hablijack.eilkurier.entity.User;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
@@ -21,7 +22,9 @@ public class SubscriptionResource {
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   @Transactional
   public void createSubscription(List<Subscription> subscriptions) {
+    User christoph = User.findById(66);
     for (Subscription subscription : subscriptions) {
+      subscription.user = christoph;
       subscription.persist();
     }
   }
