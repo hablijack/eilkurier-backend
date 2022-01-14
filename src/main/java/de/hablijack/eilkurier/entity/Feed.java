@@ -1,6 +1,7 @@
 package de.hablijack.eilkurier.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import java.util.List;
 import java.util.Set;
@@ -32,6 +33,7 @@ public class Feed extends PanacheEntity {
   public Set<Information> information;
 
   @OneToMany(mappedBy = "feed")
+  @JsonIgnore
   public Set<Subscription> subscriptions;
 
   public String language;

@@ -1,7 +1,10 @@
 package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Feed;
+import de.hablijack.eilkurier.entity.Subscription;
+import de.hablijack.eilkurier.entity.User;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
@@ -9,7 +12,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")
@@ -24,14 +26,20 @@ public class SubscriptionResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   @Transactional
-  public Response createSubscription(List<Feed> feeds) {
-    /*User christoph = User.findById(66);
+  public List<Subscription> createSubscription(List<Feed> feeds) {
+    List subscriptions = new ArrayList();
+    LOGGER.info("Trying to load current user...");
+    User christoph = User.findByEmailOptional("christoph.habel@posteo.de").get();
+    LOGGER.info("Looping feeds and generating subscriptions...");
     for (Feed feed : feeds) {
       Subscription subscription = new Subscription();
       subscription.feed = feed;
       subscription.user = christoph;
-      subscription.persist();
-    }*/
-    return Response.ok().build();
+      LOGGER.info("Subscription generated - storing in DB...");
+      subscription.persistIfNotExist();
+      subscriptions.add(subscription);
+    }
+    LOGGER.info("Subscriptions successfully generated, returning result...");
+    return subscriptions;
   }
 }

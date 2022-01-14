@@ -24,11 +24,14 @@ public class UserResource {
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   @Transactional
   public User createIfNotExists(User user) {
+    LOGGER.info("Try to find user by email..");
     Optional<User> userSearch = User.findByEmailOptional(user.email);
     if (userSearch.isEmpty()) {
+      LOGGER.info("User not found, creating new one...");
       user.persist();
       return user;
     } else {
+      LOGGER.info("User found - returning it...");
       return userSearch.get();
     }
   }

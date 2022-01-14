@@ -1,6 +1,7 @@
 package de.hablijack.eilkurier.entity;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import java.util.Optional;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class User extends PanacheEntity {
   public Boolean wizardCompleted = false;
 
   @OneToMany(mappedBy = "user")
+  @JsonIgnore
   public Set<Subscription> subscriptions;
 
   public static Optional<User> findByEmailOptional(String email) {
