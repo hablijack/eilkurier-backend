@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,8 +25,8 @@ public class User extends PanacheEntity {
 
   @Column(name = "wizard_completed", columnDefinition = "BOOLEAN DEFAULT false")
   public Boolean wizardCompleted = false;
-  
-  @OneToMany(fetch = FetchType.LAZY)
+
+  @OneToMany(mappedBy = "user")
   public Set<Subscription> subscriptions;
 
   public static Optional<User> findByEmailOptional(String email) {

@@ -1,6 +1,7 @@
 package de.hablijack.eilkurier.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -18,5 +19,8 @@ public class Subscription extends PanacheEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   public Feed feed;
+
+  @Column(name = "sortindex")
+  public int sortindex;
 
 }
