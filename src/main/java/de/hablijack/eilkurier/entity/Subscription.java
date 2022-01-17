@@ -1,6 +1,7 @@
 package de.hablijack.eilkurier.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,6 +26,10 @@ public class Subscription extends PanacheEntity {
 
   @Column(name = "sortindex")
   public int sortindex;
+
+  public static List<Subscription> findByUser(User christoph) {
+    return find("user = ?1", christoph).list();
+  }
 
   public void persistIfNotExist() {
     if (find("user = ?1 AND feed = ?2", user, feed).count() == 0) {

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -41,5 +42,16 @@ public class SubscriptionResource {
     }
     LOGGER.info("Subscriptions successfully generated, returning result...");
     return subscriptions;
+  }
+
+  @GET
+  @Path("categories/feeds/subscriptions/byUser")
+  @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
+  @Transactional
+  public List<Subscription> getByUser() {
+    LOGGER.info("Trying to load current user...");
+    User christoph = User.findByEmailOptional("christoph.habel@posteo.de").get();
+    LOGGER.info("Trying to load subscriptions for user...");
+    return Subscription.findByUser(christoph);
   }
 }
