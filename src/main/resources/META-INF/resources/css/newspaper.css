@@ -1,0 +1,431 @@
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,700,900,400italic,700italic,900italic);
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic);
+
+html {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+body {
+	font-family: 'Droid Serif', serif;
+	font-size: 14px;
+	color: #2f2f2f;
+	background-color: #f9f7f1;
+	border: 1px solid #2f2f2f;
+	border: 4px double #2f2f2f;
+}
+
+.pull-left {
+	float: left;
+}
+
+.pull-right {
+	float: right;
+}
+
+img {
+	-webkit-filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
+	filter: sepia(80%) grayscale(1) contrast(1) opacity(0.8);
+	mix-blend-mode: multiply;
+}
+
+a {
+	text-decoration: none;
+	color: #2f2f2f;
+	font-family: 'Droid Serif', serif;
+	font-size: 14px;
+	line-height: 14px;
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 20px;
+	text-align: justify;
+}
+
+.head {
+	text-align: center;
+	position: relative;
+}
+
+.head header {
+	font-family: 'Playfair Display', serif;
+	font-weight: 900;
+	font-size: 80px;
+	line-height: 80px;
+	display: inline-block;
+	line-height: 72px;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+.head header .headline {
+	vertical-align: top;
+	margin-left: 5px;
+	padding: 0;
+}
+
+.head .categories {
+	margin-right: 30px;
+	margin-left: 30px;
+	height: 40px;
+	background-color: gray;
+	margin-top: 10px;
+	color: #f9f7f1;
+	font-size: 23px;
+	font-family: 'Droid Serif', serif;
+	line-height: 40px;
+	text-transform: uppercase;
+}
+
+.head header .slogan {
+	font-family: 'Playfair Display', serif;
+	text-transform: uppercase;
+	font-size: 35px;
+	line-height: 35px;
+	font-weight: normal;
+	margin-bottom: 20px;
+}
+
+.subhead {
+	text-transform: uppercase;
+	border-bottom: 4px double #2f2f2f;
+	border-top: 0;
+	margin-right: 30px;
+	margin-left: 30px;
+}
+
+/*.subhead:before, .subhead:after {
+	background-color: #2f2f2f;
+	content: "";
+	display: inline-block;
+	height: 5px;
+	position: relative;
+	vertical-align: middle;
+	width: 725px;
+}
+.subhead:before {
+	right: 0.5em;
+	margin-left: -50%;
+}
+.subhead:after {
+	left: 0.5em;
+	margin-right: -50%;
+}*/
+
+.content {
+	margin: 30px 0px;
+}
+
+.weatherforcastbox {
+	position: absolute;
+	width: 260px;
+	left: 145px;
+	top: 35px;
+	border: 3px double #2f2f2f;
+	padding: 10px 15px 10px 15px;
+	display: inline-block;
+}
+
+/* ### COLUMNS ######################################################################## */
+.collumns {
+	margin-left: 10px;
+}
+.collumns .collumn {
+	font-size: 14px;
+	line-height: 20px;
+	cursor: pointer;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	display: inline-block;
+	vertical-align: top;
+	padding: 10px;
+	position: relative;
+}
+
+.collumns .collumn .category {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background-color: gray;
+	color: #f9f7f1;
+	padding: 5px;
+}
+
+.collumns .collumn .body img {
+	display: block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.collumns .collumn .body img:not([src]){
+	display: none;
+}
+.collumns .collumn .body:first-letter {
+	color: #2f2f2f;
+	float: left;
+	font-family: Georgia;
+	font-size: 40px;
+	line-height: 40px;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-left: 3px;
+	font-weight: bold;
+}
+
+.collumns .collumn .footer {
+	margin-top: 15px;
+	width: 100%;
+	height: 30px;
+	position: relative;
+	float: left;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.collumns .collumn .feedimg {
+	margin-top: 30px;
+	max-width: 150px;
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+}
+
+.collumns .collumn .footer p {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 0;
+}
+/* ### HEADLINES ###################################################################### */
+.collumns .collumn .headline {
+	text-align: center;
+	line-height: normal;
+	font-family: Arial, serif;
+	display: block;
+	margin: 0 auto;
+	word-wrap: break-word;
+}
+
+.collumns .collumn .headline.hl1 {
+	font-weight: 700;
+	font-size: 30px;
+	text-transform: uppercase;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl2 {
+	font-weight: 400;
+	font-style: italic;
+	font-size: 24px;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl2:before {
+	border-top: 1px solid #2f2f2f;
+	content: '';
+	width: 100px;
+	height: 7px;
+	display: block;
+	margin: 0 auto;
+}
+
+.collumns .collumn .headline.hl2:after {
+	border-bottom: 1px solid #2f2f2f;
+	content: '';
+	width: 100px;
+	height: 13px;
+	display: block;
+	margin: 0 auto;
+}
+
+.collumns .collumn .headline.hl3 {
+	font-weight: 400;
+	font-style: italic;
+	font-size: 36px;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl4 {
+	font-weight: 700;
+	font-size: 12px;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl4:before {
+	border-top: 1px solid #2f2f2f;
+	content: '';
+	width: 100px;
+	height: 7px;
+	display: block;
+	margin: 0 auto;
+}
+
+.collumns .collumn .headline.hl4:after {
+	border-bottom: 1px solid #2f2f2f;
+	content: '';
+	width: 100px;
+	height: 10px;
+	display: block;
+	margin: 0 auto;
+}
+
+.collumns .collumn .headline.hl5 {
+	font-weight: 400;
+	font-size: 42px;
+	text-transform: uppercase;
+	font-style: italic;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl6 {
+	font-weight: 400;
+	font-size: 18px;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl6:before {
+	border-top: 1px solid #2f2f2f;
+	content: '';
+	width: 100px;
+	height: 7px;
+	display: block;
+	margin: 0 auto;
+}
+
+.collumns .collumn .headline.hl6:after {
+	border-bottom: 1px solid #2f2f2f;
+	content: '';
+	width: 100px;
+	height: 10px;
+	display: block;
+	margin: 0 auto;
+}
+
+.collumns .collumn .headline.hl7 {
+	font-weight: 700;
+	font-size: 12px;
+	box-sizing: border-box;
+	display: block;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl8 {
+	font-weight: 700;
+	font-size: 12px;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl9 {
+	font-weight: 700;
+	font-size: 12px;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+.collumns .collumn .headline.hl10 {
+	font-weight: 700;
+	font-size: 12px;
+	box-sizing: border-box;
+	padding: 10px 0 10px 0;
+}
+
+/* ######################################### SMALL ################################################################## */
+
+.collumns .collumn-small {
+	width: 17%;
+	border: 1px solid gray;
+}
+
+.collumns .collumn-small .body img  {
+	max-width: 300px;
+}
+
+.collumns .collumn-small .footer {
+	margin-bottom: 100px;
+}
+.collumns .collumn-small .feedimg {
+	bottom: 40px;
+}
+.collumns .collumn-small .headline.hl1 {
+	font-weight: 700;
+	font-size: 20px;
+	text-transform: none;
+	padding: 10px 0 10px 0;
+}
+
+/* ######################################### MEDIUM ################################################################# */
+
+.collumns .collumn-middle {
+	width: 30%;
+	border: 1px solid gray;
+}
+
+.collumns .collumn-middle .body img {
+	float: left;
+	max-width: 250px;
+	width: 250px;
+	height: auto;
+}
+.collumns .collumn-middle .headline.hl1 {
+	font-weight: 700;
+	font-size: 27px;
+	text-transform: none;
+	padding: 10px 0 10px 0;
+}
+
+/* ######################################### LARGE  ################################################################# */
+
+.collumns .collumn-large {
+	width: 45%;
+	border: 1px solid gray;
+}
+
+.collumn-large .body img {
+	float: left;
+	max-width: 350px;
+	width: 350px;
+	height: auto;
+}
+
+.collumns .collumn-large .headline.hl1 {
+	font-weight: 700;
+	font-size: 30px;
+	text-transform: uppercase;
+	padding: 10px 0 10px 0;
+}
+
+/* ######################################### XLARGE  ################################################################ */
+
+.collumns .collumn-xlarge {
+	width: 64%;
+	border: 1px solid gray;
+}
+.collumns .collumn-xlarge .body img {
+	float: left;
+	width: 500px;
+	height: auto;
+}
+
+.collumns .collumn-xlarge .headline.hl6:before {
+	display: none;
+}
+
+.collumns .collumn-xlarge .headline.hl6:after {
+	display: none;
+}
+.collumns .collumn-xlarge .headline.hl1 {
+	font-weight: 700;
+	font-size: 33px;
+	text-transform: uppercase;
+	padding: 10px 0 10px 0;
+}

@@ -36,7 +36,7 @@ public class DatabaseInitialLoad {
         "https://www.heise.de/newsticker/heise-atom.xml", it).persistIfNotExist();
     new Feed("OMG! Ubuntu!", "Ubuntu News",
         "https://www.omgubuntu.co.uk/wp-content/uploads/2020/04/cropped-ava-tar-32x32.png", "image/png",
-        "http://feeds.feedburner.com/d0od?format=xml", it).persistIfNotExist();
+        "https://feeds.feedburner.com/d0od?format=xml", it).persistIfNotExist();
     new Feed("Winfuture", "Winfuture News", "https://i.wfcdn.de/5/oben_logo_left_340x68_x1.png", "image/jpg",
         "https://static.winfuture.de/feeds/WinFuture-News-rss2.0.xml", it).persistIfNotExist();
     new Feed("ZDNet", "IT-News und Hintergrundartikel für IT-Manager",
@@ -81,15 +81,17 @@ public class DatabaseInitialLoad {
         "https://music-product-news.de/gitarre-und-bass?format=feed&type=rss", music).persistIfNotExist();
     new Feed("Keys", "Musik und Computer", "https://www.keys.de/images/touchicons/apple-touch-icon-180x180.png",
         "image/png", "https://www.keys.de/?format=feed&type=rss", music).persistIfNotExist();
-    new Feed("SOUNDCHECK", "Das Bandmagazin", "https://www.soundcheck.de/images/Logos/soundcheck-logo_web.png",
-        "image/png", "https://www.soundcheck.de/?format=feed&type=rss", music).persistIfNotExist();
+    new Feed("Gearnews", "Der Equipment-Blog mit heißen News für Gitarre, Recording &#38; Synthesizer",
+        "https://www.gearnews.de/favicons/apple-icon-180x180.png",
+        "image/png", "https://www.gearnews.de/feed/", music).persistIfNotExist();
     // #############################################################################################################
     Category news = new Category("Nachrichten", "Schlagzeilen und Neuigkeiten.");
     news.persistIfNotExist();
-    new Feed("Digital Present ", "Tagesspiegel", "http://digitalpresent.tagesspiegel.de/images/tagesspiegel.png",
+    new Feed("Digital Present ", "Tagesspiegel", "https://digitalpresent.tagesspiegel.de/images/tagesspiegel.png",
         "image/png", "https://digitalpresent.tagesspiegel.de/feed.xml", news).persistIfNotExist();
     new Feed("ZEIT ONLINE", "Nachrichten, Hintergründe und Debatten",
-        "http://img.zeit.de/bilder/elemente_01_06/logos/homepage_top.gif", "image/gif", "http://newsfeed.zeit.de/index",
+        "https://img.zeit.de/bilder/elemente_01_06/logos/homepage_top.gif", "image/gif",
+        "https://newsfeed.zeit.de/index",
         news).persistIfNotExist();
     new Feed("SPIEGEL ONLINE",
         "Deutschlands führende Nachrichtenseite. Alles Wichtige aus Politik, Wirtschaft, Sport, Kultur, Wissenschaft, Technik und mehr.",
@@ -98,7 +100,7 @@ public class DatabaseInitialLoad {
         news).persistIfNotExist();
     new Feed("taz.de",
         "Kritischer, unabhängiger Journalismus der linken Nachrichtenseite taz: Analysen, Hintergründe, Kommentare, Interviews, Reportagen. Genossenschaft seit 1992.",
-        "http://www.taz.de/fileadmin/templates/neu/images/logo_tazde_rss_2.gif", "image/gif",
+        "https://www.taz.de/fileadmin/templates/neu/images/logo_tazde_rss_2.gif", "image/gif",
         "https://taz.de/!p4608;rss/", news).persistIfNotExist();
     new Feed("Frankfurter Allgemeine Zeitung",
         "News, Nachrichten und aktuelle Meldungen aus allen Ressorts. Politik, Wirtschaft, Sport, Feuilleton und Finanzen im Überblick.",

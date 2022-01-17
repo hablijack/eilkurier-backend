@@ -2,6 +2,7 @@ package de.hablijack.eilkurier.entity;
 
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -69,6 +70,10 @@ public class Information extends PanacheEntity {
 
   public static boolean existsByGuidAndFeed(String guid, Feed feed) {
     return find("guid = ?1 and feed = ?2", guid, feed).count() > 0;
+  }
+
+  public static Collection<? extends Information> findByFeed(Feed feed) {
+    return find("feed = ?2", feed).list();
   }
 
   @Override

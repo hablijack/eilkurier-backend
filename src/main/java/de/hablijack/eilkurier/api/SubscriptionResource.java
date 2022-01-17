@@ -47,7 +47,6 @@ public class SubscriptionResource {
   @GET
   @Path("categories/feeds/subscriptions/byUser")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
-  @Transactional
   public List<Subscription> getByUser() {
     LOGGER.info("Trying to load current user...");
     User christoph = User.findByEmailOptional("christoph.habel@posteo.de").get();
