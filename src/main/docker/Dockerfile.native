@@ -34,8 +34,8 @@ ENTRYPOINT ["/work/bootstrap.sh"]
 CMD [ "./application", \
     "-Dquarkus.http.host=0.0.0.0", \
     "-Dquarkus.http.port=${PORT}", \
-    "-Dquarkus.datasource.jdbc.url=${JDBC_DATABASE_URL}" \
-    "-Dquarkus.oidc.client-id=${AUTH0_CLIENT_ID}" \
-    "-Dquarkus.oidc.auth-server-url"=${AUTH0_AUTH_SERVER}" \
-    "-Dquarkus.oidc.credentials.secret"=${AUTH0_SECRET}" \
+    "-Dquarkus.datasource.jdbc.url=${JDBC_DATABASE_URL}", \
+    "-Dquarkus.oidc.client-id=${AUTH0_CLIENT_ID}", \
+    "-Dquarkus.oidc.auth-server-url=${AUTH0_AUTH_SERVER}", \
+    "-Dquarkus.oidc.credentials.secret=${AUTH0_SECRET}" \
     ]
