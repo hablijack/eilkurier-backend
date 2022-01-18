@@ -6,11 +6,10 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
 import org.apache.http.HttpStatus;
 import org.jboss.logging.Logger;
 
-@Provider
+
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
 
   private static final Logger LOGGER = Logger.getLogger(NotFoundExceptionMapper.class.getName());

@@ -1,0 +1,18 @@
+<div class="collumn collumn-large">
+    <div class="head">
+        <p class="headline hl1">
+            {info.title}
+        </p>
+        <p>
+            <span class="headline hl6">von: {info.author}</span>
+        </p>
+    </div>
+    <div class="body">
+        {info.message.raw}
+    </div>
+    <div class="footer">
+        — {info.feed.name} {info.timestamp} Uhr —
+    </div>
+    <span class="category">{info.feed.category.name}</span>
+    <img class="feedimg" src="{info.feed.picture}"/>
+</div>

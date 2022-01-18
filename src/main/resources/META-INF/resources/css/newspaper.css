@@ -166,9 +166,9 @@ p {
 	color: #2f2f2f;
 	float: left;
 	font-family: Georgia;
-	font-size: 40px;
+	font-size: 45px;
 	line-height: 40px;
-	padding-top: 4px;
+	padding-top: 0px;
 	padding-right: 4px;
 	padding-left: 3px;
 	font-weight: bold;
@@ -348,6 +348,7 @@ p {
 
 .collumns .collumn-small .body img  {
 	max-width: 300px;
+	height: auto;
 }
 
 .collumns .collumn-small .footer {
@@ -374,6 +375,7 @@ p {
 	float: left;
 	max-width: 250px;
 	width: 250px;
+	height: auto;
 	height: auto;
 }
 .collumns .collumn-middle .headline.hl1 {

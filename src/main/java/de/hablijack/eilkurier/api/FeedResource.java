@@ -1,16 +1,14 @@
 package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Feed;
-import de.hablijack.eilkurier.service.FeedService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.IOException;
+import io.vertx.mutiny.core.eventbus.EventBus;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import javax.xml.stream.XMLStreamException;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")
@@ -21,7 +19,7 @@ public class FeedResource {
   private static final Logger LOGGER = Logger.getLogger(FeedResource.class.getName());
 
   @Inject
-  FeedService feedService;
+  EventBus eventBus;
 
   @GET
   @Path("categories/feeds")
@@ -38,11 +36,7 @@ public class FeedResource {
     LOGGER.info("Starting to fetch Feeds...");
     List<Feed> allFeeds = Feed.listAll();
     for (Feed feed : allFeeds) {
-      try {
-        feedService.fetchFeedInformation(feed);
-      } catch (XMLStreamException | IOException exception) {
-        LOGGER.error("Error on parsing feed: " + feed.url, exception);
-      }
+      eventBus.send("fetch_feed_information", feed);
     }
     LOGGER.info("Feeds fetched successfully.");
   }

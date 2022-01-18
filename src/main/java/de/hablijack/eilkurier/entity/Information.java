@@ -73,7 +73,7 @@ public class Information extends PanacheEntity {
   }
 
   public static Collection<? extends Information> findByFeed(Feed feed) {
-    return find("feed = ?2", feed).list();
+    return find("feed = ?1", feed).list();
   }
 
   @Override
