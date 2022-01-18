@@ -15,7 +15,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
 import org.xml.sax.SAXException;
 
-
 @Startup
 @ApplicationScoped
 public class DatabaseInitialLoad {
@@ -28,7 +27,7 @@ public class DatabaseInitialLoad {
   public void initializeWithBaseData(@Observes StartupEvent event)
       throws XMLStreamException, IOException, ParserConfigurationException, ParseException, SAXException {
     Category it = new Category("IT, Hardware, Software", "Nachrichten- und Artikelquellen über die digitale Welt.");
-    it.persistIfNotExist();
+    it = it.persistIfNotExist();
     new Feed("Golem.de News", "IT-News fuer Profis", "https://www.golem.de/staticrl/images/golem-rss.png", "image/png",
         "https://rss.golem.de/rss.php?feed=ATOM2.0", it).persistIfNotExist();
     new Feed("heise online News", "Nachrichten nicht nur aus der Welt der Computer",
@@ -55,7 +54,7 @@ public class DatabaseInitialLoad {
     // #############################################################################################################
     Category diy =
         new Category("DIY, Maker, Heimwerken, Basteln", "Anleitungen und Beschreibungen von selbstgebauten Projekten.");
-    diy.persistIfNotExist();
+    diy = diy.persistIfNotExist();
     new Feed("Lifehacker", "Tips, tricks and downloads for getting things done",
         "https://i.kinja-img.com/gawker-media/image/upload/c_fill,f_auto,fl_progressive,g_center,h_80,q_80,w_80/u0939doeuioaqhspkjyc.png",
         "image/png",
@@ -72,7 +71,7 @@ public class DatabaseInitialLoad {
         "https://learn.adafruit.com/feed", diy).persistIfNotExist();
     // #############################################################################################################
     Category music = new Category("Musik, Band, Instrumente", "Nachrichten- und Artikelquellen über das Musizieren.");
-    music.persistIfNotExist();
+    music = music.persistIfNotExist();
     new Feed("GITARRE & BASS", "Das Musiker-Fachmagazin",
         "https://www.gitarrebass.de/wp-content/uploads/2015/04/GITARRE-BASS_Logo.png", "image/png",
         "https://www.gitarrebass.de/feed/", music).persistIfNotExist();
@@ -86,7 +85,7 @@ public class DatabaseInitialLoad {
         "image/png", "https://www.gearnews.de/feed/", music).persistIfNotExist();
     // #############################################################################################################
     Category news = new Category("Nachrichten", "Schlagzeilen und Neuigkeiten.");
-    news.persistIfNotExist();
+    news = news.persistIfNotExist();
     new Feed("Digital Present ", "Tagesspiegel", "https://digitalpresent.tagesspiegel.de/images/tagesspiegel.png",
         "image/png", "https://digitalpresent.tagesspiegel.de/feed.xml", news).persistIfNotExist();
     new Feed("ZEIT ONLINE", "Nachrichten, Hintergründe und Debatten",
@@ -135,7 +134,7 @@ public class DatabaseInitialLoad {
         news).persistIfNotExist();
     // #############################################################################################################
     Category regionalNews = new Category("Regionale Nachrichten", "Nachrichten aus der Region.");
-    regionalNews.persistIfNotExist();
+    regionalNews = regionalNews.persistIfNotExist();
     new Feed("Onetz Amberg", "Regionale Nachrichten aus der Region Amberg",
         "https://www.onetz.de/sites/all/themes/dnt_onet/images/titel-onetz.svg", "image/svg",
         "https://www.onetz.de/themen/Region%20Amberg/index.rss", regionalNews).persistIfNotExist();

@@ -31,9 +31,12 @@ public class Category extends PanacheEntity {
     this.description = description;
   }
 
-  public void persistIfNotExist() {
+  public Category persistIfNotExist() {
     if (find("name = ?1", name).count() == 0) {
       this.persist();
+      return this;
+    } else {
+      return (Category) find("name = ?1", name).list().get(0);
     }
   }
 }
