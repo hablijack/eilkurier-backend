@@ -10,26 +10,23 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-
-@ApplicationScoped
+@Path("print")
 public class PrintResource {
 
   @Location("print.html")
   Template printedEilkurierTemplate;
 
   @GET
-  @Path("print")
   @Produces(MediaType.TEXT_HTML)
   public TemplateInstance get(@QueryParam("userId") Long userId) {
-    List<Information> information = new ArrayList();
-    Set<String> categoryNames = new HashSet();
+    List<Information> information = new ArrayList<>();
+    Set<String> categoryNames = new HashSet<>();
     User christoph = User.findById(userId);
     List<Subscription> subscriptions = Subscription.findByUser(christoph);
     for (Subscription subscription : subscriptions) {

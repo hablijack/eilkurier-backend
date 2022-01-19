@@ -140,7 +140,7 @@ public class FeedService {
   private String getCharacterData(XMLEventReader eventReader) throws XMLStreamException {
     XMLEvent event = eventReader.nextEvent();
     if (event instanceof Characters) {
-      return event.asCharacters().getData();
+      return event.asCharacters().getData().trim();
     } else {
       return "";
     }
