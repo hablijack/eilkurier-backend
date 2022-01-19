@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Build and push Docker Image to Heroku
           command: |
-            docker build -f ./src/main/docker/Dockerfile.native -t registry.heroku.com/$HEROKU_APP_NAME/web .
+            docker build --build-arg AUTH0_CLIENT_ID --build-arg AUTH0_AUTH_SERVER --build-arg AUTH0_SECRET -f ./src/main/docker/Dockerfile.native -t registry.heroku.com/$HEROKU_APP_NAME/web .
             docker login -username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
       - run:
