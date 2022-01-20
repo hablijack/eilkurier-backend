@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Brawler&family=Playfair+Display:wght@400;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @font-face {
   font-family: chomsky;
-  src: url(/font/Chomsky.otf);
+  src: url(Chomsky.otf);
 }
 
 html {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
+	overflow-y: scroll;
 }
 
 body {
@@ -80,7 +80,7 @@ p {
 }
 
 .head header .slogan {
-	font-family: 'Playfair Display', serif;
+	font-family: 'Bebas Neue', cursive;
 	text-transform: uppercase;
 	font-size: 35px;
 	line-height: 35px;
@@ -115,7 +115,7 @@ p {
 }
 
 .content {
-	margin: 30px;
+	padding: 20px;
 }
 
 .weatherforcastbox {
@@ -129,44 +129,37 @@ p {
 }
 
 /* ### COLUMNS ######################################################################## */
-.collumns {
-	/*margin-left: 10px;*/
-    /*flex-direction: column;*/
-}
-.collumns .collumn {
-	/*font-size: 14px;
-	line-height: 20px;
-	cursor: pointer;
-	margin-left: 20px;
+
+.columns .column {
 	margin-bottom: 20px;
-	display: inline-block;
-	vertical-align: top;
-	padding: 10px;
-	position: relative;*/
+	border: 1px solid #2f2f2f;
 }
 
-.collumns .collumn .category {
-	/*position: absolute;
-	bottom: 0;
-	left: 0;*/
+.columns .column .category {
 	background-color: #2f2f2f;
 	color: #f9f7f1;
-	padding: 5px;
+	position: relative;
+	left: 0;
+	bottom: 7px;
+	padding: 8px;
+	border-radius: 0 10px 0 0;
 }
 
-.collumns .collumn .body img {
-	/*display: block;
-	margin-right: 10px;
-	margin-bottom: 10px;*/
+.columns .column .feedimg {
+	max-height: 70px;
+	max-width: 150px;
+	position: absolute;
+	bottom: 7px;
+	right: 7px;
 }
 
-.collumns .collumn .body img:not([src]){
+.columns .column .body img:not([src]){
 	display: none;
 }
-.collumns .collumn .body:first-letter {
+.columns .column .body:first-letter {
 	color: #2f2f2f;
 	float: left;
-	font-family: Georgia;
+	font-family: 'Bebas Neue', cursive;
 	font-size: 45px;
 	line-height: 40px;
 	padding-top: 0px;
@@ -175,34 +168,8 @@ p {
 	font-weight: bold;
 }
 
-.collumns .collumn .footer {
-	/*margin-top: 15px;
-	width: 100%;
-	height: 30px;
-	position: relative;
-	float: left;
-	text-align: center;
-	margin-bottom: 50px;*/
-}
-
-.collumns .collumn .feedimg {
-	/*margin-top: 30px;
-	max-width: 150px;
-	position: absolute;
-	right: 5px;
-	bottom: 5px;*/
-}
-
-.collumns .collumn .footer p {
-	/*position: absolute;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	text-align: center;
-	margin-bottom: 0;*/
-}
 /* ### HEADLINES ###################################################################### */
-.collumns .collumn .headline {
+.columns .column .headline {
 	text-align: center;
 	line-height: normal;
     font-family: 'Bebas Neue', cursive;
@@ -211,14 +178,14 @@ p {
 	word-wrap: break-word;
 }
 
-.collumns .collumn .headline.hl1 {
+.columns .column .headline.hl1 {
 	font-weight: 700;
 	font-size: 30px;
 	text-transform: uppercase;
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl2 {
+.columns .column .headline.hl2 {
 	font-weight: 400;
 	font-style: italic;
 	font-size: 24px;
@@ -226,7 +193,7 @@ p {
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl2:before {
+.columns .column .headline.hl2:before {
 	border-top: 1px solid #2f2f2f;
 	content: '';
 	width: 100px;
@@ -235,7 +202,7 @@ p {
 	margin: 0 auto;
 }
 
-.collumns .collumn .headline.hl2:after {
+.columns .column .headline.hl2:after {
 	border-bottom: 1px solid #2f2f2f;
 	content: '';
 	width: 100px;
@@ -244,7 +211,7 @@ p {
 	margin: 0 auto;
 }
 
-.collumns .collumn .headline.hl3 {
+.columns .column .headline.hl3 {
 	font-weight: 400;
 	font-style: italic;
 	font-size: 36px;
@@ -252,14 +219,14 @@ p {
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl4 {
+.columns .column .headline.hl4 {
 	font-weight: 700;
 	font-size: 12px;
 	box-sizing: border-box;
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl4:before {
+.columns .column .headline.hl4:before {
 	border-top: 1px solid #2f2f2f;
 	content: '';
 	width: 100px;
@@ -268,7 +235,7 @@ p {
 	margin: 0 auto;
 }
 
-.collumns .collumn .headline.hl4:after {
+.columns .column .headline.hl4:after {
 	border-bottom: 1px solid #2f2f2f;
 	content: '';
 	width: 100px;
@@ -277,7 +244,7 @@ p {
 	margin: 0 auto;
 }
 
-.collumns .collumn .headline.hl5 {
+.columns .column .headline.hl5 {
 	font-weight: 400;
 	font-size: 42px;
 	text-transform: uppercase;
@@ -286,14 +253,14 @@ p {
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl6 {
+.columns .column .headline.hl6 {
 	font-weight: 400;
 	font-size: 18px;
 	box-sizing: border-box;
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl6:before {
+.columns .column .headline.hl6:before {
 	border-top: 1px solid #2f2f2f;
 	content: '';
 	width: 100px;
@@ -302,7 +269,7 @@ p {
 	margin: 0 auto;
 }
 
-.collumns .collumn .headline.hl6:after {
+.columns .column .headline.hl6:after {
 	border-bottom: 1px solid #2f2f2f;
 	content: '';
 	width: 100px;
@@ -311,7 +278,7 @@ p {
 	margin: 0 auto;
 }
 
-.collumns .collumn .headline.hl7 {
+.columns .column .headline.hl7 {
 	font-weight: 700;
 	font-size: 12px;
 	box-sizing: border-box;
@@ -319,21 +286,21 @@ p {
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl8 {
+.columns .column .headline.hl8 {
 	font-weight: 700;
 	font-size: 12px;
 	box-sizing: border-box;
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl9 {
+.columns .column .headline.hl9 {
 	font-weight: 700;
 	font-size: 12px;
 	box-sizing: border-box;
 	padding: 10px 0 10px 0;
 }
 
-.collumns .collumn .headline.hl10 {
+.columns .column .headline.hl10 {
 	font-weight: 700;
 	font-size: 12px;
 	box-sizing: border-box;
@@ -342,23 +309,20 @@ p {
 
 /* ######################################### SMALL ################################################################## */
 
-.collumns .collumn-small {
-	/*width: 17%;*/
-	width: 23%;
-	padding: 15px;
+.columns .column-small, .columns .column-sizer {
+	width: calc(20% - 18px); /* shitty but respect outer double border width */
 }
 
-.collumns .collumn-small .body img  {
+.columns .column-small .body img  {
 	max-width: 300px;
+	height: auto;
 }
 
-.collumns .collumn-small .footer {
+.columns .column-small .footer {
 	margin-bottom: 100px;
 }
-.collumns .collumn-small .feedimg {
-	/*bottom: 40px;*/
-}
-.collumns .collumn-small .headline.hl1 {
+
+.columns .column-small .headline.hl1 {
 	font-weight: 700;
 	font-size: 20px;
 	text-transform: none;
