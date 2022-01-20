@@ -2,8 +2,10 @@ package de.hablijack.eilkurier.entity;
 
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,7 +55,7 @@ public class Information extends PanacheEntity {
   @Lob
   @Column
   @Type(type = "org.hibernate.type.TextType")
-  public String picture;
+  public String pictures;
 
   @Lob
   @Column(nullable = false)
@@ -76,6 +78,10 @@ public class Information extends PanacheEntity {
     return find("feed = ?1", feed).list();
   }
 
+  public List<String> getPictureList() {
+    return Arrays.asList(this.pictures.split("||"));
+  }
+
   @Override
   public String toString() {
     return "Information{"
@@ -85,7 +91,7 @@ public class Information extends PanacheEntity {
         + ", guid='" + guid + '\''
         + ", author='" + author + '\''
         + ", link='" + link + '\''
-        + ", picture='" + picture + '\''
+        + ", picture='" + pictures + '\''
         + ", message='" + message + '\''
         + ", textonlymessage='" + textonlymessage + '\''
         + ", feed=" + feed

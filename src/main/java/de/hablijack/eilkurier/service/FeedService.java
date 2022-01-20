@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.enterprise.context.ApplicationScoped;
@@ -99,26 +101,25 @@ public class FeedService {
           String message = "";
           if (item.hasContent()) {
             message = item.content;
-          } else {
-            message = item.description;
           }
-          if (message.length() > MESSAGE_MAX_LENGTH) {
-            // TODO: implement via Flag
-            message = truncateMessageBody(message, MESSAGE_CUT_LENGTH) + " (... weiterlesen ...)";
-          } else if (message.length() < MESSAGE_MIN_LENGTH) {
+
+          if (message.length() < MESSAGE_MIN_LENGTH) {
             continue;
           }
           info.message = message;
-          if (item.hasEnclusure()) {
-            info.picture = item.enclosure;
-          } else {
-            Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
-            Matcher imageMatcher = regexImagePattern.matcher(message);
-            if (imageMatcher.find() && imageMatcher.group(1).contains("http")) {
-              info.picture = imageMatcher.group(1);
+
+          Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
+          Matcher imageMatcher = regexImagePattern.matcher(message);
+          List<String> images = new ArrayList<>();
+          while (imageMatcher.find()) {
+            if (imageMatcher.group(1).contains("http")) {
+              images.add(imageMatcher.group(1));
             }
           }
-          info.textonlymessage = Jsoup.clean(message, Whitelist.simpleText());
+          info.pictures = String.join("||", images);
+
+          String textonlymessage = message.replace("<![CDATA", "").replace("]]", "");
+          info.textonlymessage = Jsoup.clean(textonlymessage, Whitelist.simpleText());
           info.guid = item.guid;
           info.link = item.link;
           info.title = item.title;

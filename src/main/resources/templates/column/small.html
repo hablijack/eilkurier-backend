@@ -1,5 +1,5 @@
 <div class="column column-small">
-    <a href="{info.link}">
+    <a href="{info.link}" target="_blank">
         <div class="head">
             <p class="headline hl1">
                 {info.title}
@@ -9,7 +9,11 @@
             </p>
         </div>
         <div class="body">
-            {info.message.raw}
+            {info.textonlymessage}
+            <br/><br/>
+            {#for picture in info.pictureList}
+            <img src="{picture}"/>
+            {/for}
         </div>
         <div class="footer">
             — {info.feed.name} {info.timestamp} Uhr —
