@@ -1,8 +1,8 @@
-var iso = new Isotope('.collumns', {
-    itemSelector: '.collumn',
+var iso = new Isotope('.columns', {
+    itemSelector: '.column',
     percentPosition: true,
     masonry: {
-        columnWidth: '.collumn-sizer',
+        columnWidth: '.column-sizer',
         gutter: 20
     }
 });
