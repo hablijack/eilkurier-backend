@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Brawler&family=Playfair+Display:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@font-face {
+  font-family: chomsky;
+  src: url(/font/Chomsky.otf);
+}
 
 html {
 	-moz-osx-font-smoothing: grayscale;
@@ -7,7 +12,7 @@ html {
 }
 
 body {
-	font-size: 14px;
+	font-size: 16px;
 	color: #2f2f2f;
 	background-color: #f9f7f1;
 	border: 1px solid #2f2f2f;
@@ -31,8 +36,6 @@ img {
 a {
 	text-decoration: none;
 	color: #2f2f2f;
-	font-size: 14px;
-	line-height: 14px;
 }
 
 p {
@@ -57,7 +60,7 @@ p {
 }
 
 .head header .headline {
-    font-family: Brawler, serif,
+    font-family: 'Chomsky', serif;
 	vertical-align: top;
 	margin-left: 5px;
 	padding: 0;
@@ -67,11 +70,11 @@ p {
 	margin-right: 30px;
 	margin-left: 30px;
 	height: 40px;
-	background-color: gray;
+	background-color: #2f2f2f;
 	margin-top: 10px;
 	color: #f9f7f1;
 	font-size: 23px;
-	font-family: 'Droid Serif', serif;
+	font-family: 'Bebas Neue', cursive;
 	line-height: 40px;
 	text-transform: uppercase;
 }
@@ -93,14 +96,14 @@ p {
 	margin-left: 30px;
 }
 
-/*.subhead:before, .subhead:after {
+.subhead:before, .subhead:after {
 	background-color: #2f2f2f;
 	content: "";
 	display: inline-block;
-	height: 5px;
+	height: 1px;
 	position: relative;
 	vertical-align: middle;
-	width: 725px;
+	width: 20%;
 }
 .subhead:before {
 	right: 0.5em;
@@ -109,10 +112,10 @@ p {
 .subhead:after {
 	left: 0.5em;
 	margin-right: -50%;
-}*/
+}
 
 .content {
-	margin: 30px 0px;
+	margin: 30px;
 }
 
 .weatherforcastbox {
@@ -127,10 +130,11 @@ p {
 
 /* ### COLUMNS ######################################################################## */
 .collumns {
-	margin-left: 10px;
+	/*margin-left: 10px;*/
+    /*flex-direction: column;*/
 }
 .collumns .collumn {
-	font-size: 14px;
+	/*font-size: 14px;
 	line-height: 20px;
 	cursor: pointer;
 	margin-left: 20px;
@@ -138,22 +142,22 @@ p {
 	display: inline-block;
 	vertical-align: top;
 	padding: 10px;
-	position: relative;
+	position: relative;*/
 }
 
 .collumns .collumn .category {
-	position: absolute;
+	/*position: absolute;
 	bottom: 0;
-	left: 0;
-	background-color: gray;
+	left: 0;*/
+	background-color: #2f2f2f;
 	color: #f9f7f1;
 	padding: 5px;
 }
 
 .collumns .collumn .body img {
-	display: block;
+	/*display: block;
 	margin-right: 10px;
-	margin-bottom: 10px;
+	margin-bottom: 10px;*/
 }
 
 .collumns .collumn .body img:not([src]){
@@ -172,36 +176,36 @@ p {
 }
 
 .collumns .collumn .footer {
-	margin-top: 15px;
+	/*margin-top: 15px;
 	width: 100%;
 	height: 30px;
 	position: relative;
 	float: left;
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 50px;*/
 }
 
 .collumns .collumn .feedimg {
-	margin-top: 30px;
+	/*margin-top: 30px;
 	max-width: 150px;
 	position: absolute;
 	right: 5px;
-	bottom: 5px;
+	bottom: 5px;*/
 }
 
 .collumns .collumn .footer p {
-	position: absolute;
+	/*position: absolute;
 	right: 0;
 	bottom: 0;
 	width: 100%;
 	text-align: center;
-	margin-bottom: 0;
+	margin-bottom: 0;*/
 }
 /* ### HEADLINES ###################################################################### */
 .collumns .collumn .headline {
 	text-align: center;
 	line-height: normal;
-	font-family: Arial, serif;
+    font-family: 'Bebas Neue', cursive;
 	display: block;
 	margin: 0 auto;
 	word-wrap: break-word;
@@ -339,92 +343,24 @@ p {
 /* ######################################### SMALL ################################################################## */
 
 .collumns .collumn-small {
-	width: 17%;
-	border: 1px solid gray;
+	/*width: 17%;*/
+	width: 23%;
+	padding: 15px;
 }
 
 .collumns .collumn-small .body img  {
 	max-width: 300px;
-	height: auto;
 }
 
 .collumns .collumn-small .footer {
 	margin-bottom: 100px;
 }
 .collumns .collumn-small .feedimg {
-	bottom: 40px;
+	/*bottom: 40px;*/
 }
 .collumns .collumn-small .headline.hl1 {
 	font-weight: 700;
 	font-size: 20px;
 	text-transform: none;
-	padding: 10px 0 10px 0;
-}
-
-/* ######################################### MEDIUM ################################################################# */
-
-.collumns .collumn-middle {
-	width: 30%;
-	border: 1px solid gray;
-}
-
-.collumns .collumn-middle .body img {
-	float: left;
-	max-width: 250px;
-	width: 250px;
-	height: auto;
-	height: auto;
-}
-.collumns .collumn-middle .headline.hl1 {
-	font-weight: 700;
-	font-size: 27px;
-	text-transform: none;
-	padding: 10px 0 10px 0;
-}
-
-/* ######################################### LARGE  ################################################################# */
-
-.collumns .collumn-large {
-	width: 45%;
-	border: 1px solid gray;
-}
-
-.collumn-large .body img {
-	float: left;
-	max-width: 350px;
-	width: 350px;
-	height: auto;
-}
-
-.collumns .collumn-large .headline.hl1 {
-	font-weight: 700;
-	font-size: 30px;
-	text-transform: uppercase;
-	padding: 10px 0 10px 0;
-}
-
-/* ######################################### XLARGE  ################################################################ */
-
-.collumns .collumn-xlarge {
-	width: 64%;
-	border: 1px solid gray;
-}
-.collumns .collumn-xlarge .body img {
-	float: left;
-	width: 500px;
-	height: auto;
-}
-
-.collumns .collumn-xlarge .headline.hl6:before {
-	display: none;
-}
-
-.collumns .collumn-xlarge .headline.hl6:after {
-	display: none;
-}
-.collumns .collumn-xlarge .headline.hl1 {
-	font-weight: 700;
-	font-size: 33px;
-	text-transform: uppercase;
 	padding: 10px 0 10px 0;
 }
