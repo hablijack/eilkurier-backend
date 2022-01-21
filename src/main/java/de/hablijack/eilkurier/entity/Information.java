@@ -4,6 +4,8 @@ package de.hablijack.eilkurier.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -73,7 +75,7 @@ public class Information extends PanacheEntity {
   }
 
   public Set<String> getPictureList() {
-    return Set.of(this.pictures.split("\\|\\|"));
+    return new HashSet<String>(List.of(this.pictures.split("\\|\\|")));
   }
 
   @Override
