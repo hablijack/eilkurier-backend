@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -35,6 +36,8 @@ public class FeedService {
 
   private static final Logger LOGGER = Logger.getLogger(FeedService.class.getName());
 
+  private static final List<String> BLACKLIST_DOMAIN_LIST = Arrays.asList("cpx.golem.de");
+
   @Transactional
   @ConsumeEvent(value = "fetch_feed_information", blocking = true)
   @SuppressFBWarnings(value = "URLCONNECTION_SSRF_FD", justification = "we validated our URLs often enough...")
@@ -52,9 +55,12 @@ public class FeedService {
     }
 
     HttpURLConnection conn = (HttpURLConnection) (url.openConnection());
-    conn.setInstanceFollowRedirects(false);
+    conn.setRequestProperty("User-Agent",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+    conn.setInstanceFollowRedirects(true);
     conn.connect();
     XMLEventReader eventReader = inputFactory.createXMLEventReader(conn.getInputStream());
+
     while (eventReader.hasNext()) {
       XMLEvent event = eventReader.nextEvent();
       if (event.isStartElement()) {
@@ -113,7 +119,10 @@ public class FeedService {
           List<String> images = new ArrayList<>();
           while (imageMatcher.find()) {
             if (imageMatcher.group(1).contains("http")) {
-              images.add(imageMatcher.group(1));
+              String image = imageMatcher.group(1);
+              if (!isBlacklisted(image)) {
+                images.add(imageMatcher.group(1));
+              }
             }
           }
           info.pictures = String.join("||", images);
@@ -136,6 +145,17 @@ public class FeedService {
       }
     }
     conn.disconnect();
+  }
+
+  private boolean isBlacklisted(String imageUrl) {
+    boolean blacklisted = false;
+    for (String blacklistedDomain : BLACKLIST_DOMAIN_LIST) {
+      if (imageUrl.contains(blacklistedDomain)) {
+        blacklisted = true;
+        break;
+      }
+    }
+    return blacklisted;
   }
 
   private String getCharacterData(XMLEventReader eventReader) throws XMLStreamException {
