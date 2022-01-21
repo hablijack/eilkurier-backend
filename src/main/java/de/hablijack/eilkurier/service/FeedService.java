@@ -128,7 +128,7 @@ public class FeedService {
           info.pictures = String.join("||", images);
 
           String textonlymessage = message.replace("<![CDATA", "").replace("]]", "");
-          info.textonlymessage = Jsoup.clean(textonlymessage, Whitelist.simpleText());
+          info.textonlymessage = Jsoup.clean(textonlymessage, Whitelist.none());
           info.guid = item.guid;
           info.link = item.link;
           info.title = item.title;

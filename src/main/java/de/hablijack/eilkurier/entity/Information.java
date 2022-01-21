@@ -79,7 +79,7 @@ public class Information extends PanacheEntity {
   }
 
   public List<String> getPictureList() {
-    return Arrays.asList(this.pictures.split("||"));
+    return Arrays.asList(this.pictures.split("\\|\\|"));
   }
 
   @Override

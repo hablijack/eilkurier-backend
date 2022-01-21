@@ -80,9 +80,9 @@ public class DatabaseInitialLoad {
         "https://music-product-news.de/gitarre-und-bass?format=feed&type=rss", music).persistIfNotExist();
     new Feed("Keys", "Musik und Computer", "https://www.keys.de/images/touchicons/apple-touch-icon-180x180.png",
         "image/png", "https://www.keys.de/?format=feed&type=rss", music).persistIfNotExist();
-    new Feed("Gearnews", "Der Equipment-Blog mit heißen News für Gitarre, Recording &#38; Synthesizer",
+    new Feed("Gearnews", "Der Equipment-Blog mit heißen News für Gitarren",
         "https://www.gearnews.de/favicons/apple-icon-180x180.png",
-        "image/png", "https://www.gearnews.de/feed/", music).persistIfNotExist();
+        "image/png", "https://www.gearnews.de/bereich/gitarre/feed/", music).persistIfNotExist();
     // #############################################################################################################
     Category news = new Category("Nachrichten", "Schlagzeilen und Neuigkeiten.");
     news = news.persistIfNotExist();
