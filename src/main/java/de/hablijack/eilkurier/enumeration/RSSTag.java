@@ -7,6 +7,7 @@ public enum RSSTag {
   CHANNEL("channel"),
   LANGUAGE("language"),
   COPYRIGHT("copyright"),
+  IMAGE("image"),
   LINK("link"),
   AUTHOR("author"),
   ITEM("item"),

@@ -80,6 +80,8 @@ public class FeedService {
           item.link = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.GUID.getName())) {
           item.guid = getCharacterData(eventReader);
+        } else if (localPart.contains(RSSTag.IMAGE.getName())) {
+          item.image = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.LANGUAGE.getName())) {
           item.language = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.AUTHOR.getName())) {
@@ -112,7 +114,6 @@ public class FeedService {
           if (message.length() < MESSAGE_MIN_LENGTH) {
             continue;
           }
-          info.message = message;
 
           Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
           Matcher imageMatcher = regexImagePattern.matcher(message);
@@ -126,6 +127,9 @@ public class FeedService {
             }
           }
           info.pictures = String.join("||", images);
+          if (item.image != null && item.image.length() > 0) {
+            info.pictures += item.image + "||" + info.pictures;
+          }
 
           String textonlymessage = message.replace("<![CDATA", "").replace("]]", "");
           info.textonlymessage = Jsoup.clean(textonlymessage, Whitelist.none());

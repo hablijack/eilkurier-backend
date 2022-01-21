@@ -10,6 +10,7 @@ public class RssItem {
   public String description;
   public String content;
   public String title;
+  public String image;
   public String link;
   public String language;
   public String author;
