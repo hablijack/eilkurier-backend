@@ -159,7 +159,7 @@ p {
 .columns .column .body img:not([src]){
 	display: none;
 }
-.columns .column .body:first-letter {
+.columns .column .body .message:first-letter {
 	color: #2f2f2f;
 	float: left;
 	font-family: 'Bebas Neue', cursive;
@@ -169,6 +169,10 @@ p {
 	padding-right: 4px;
 	padding-left: 3px;
 	font-weight: bold;
+}
+
+.columns .column .body {
+	margin-bottom: 35px;
 }
 
 /* ### HEADLINES ###################################################################### */
