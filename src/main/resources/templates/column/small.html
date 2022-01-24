@@ -4,14 +4,11 @@
             <p class="headline hl1">
                 {info.title}
             </p>
-            <p>
-                <span class="headline hl6"><img class="feedimg" src="{info.feed.picture}"/></span>
-            </p>
         </div>
         <div class="body">
             <img src="{info.headlinePicture}"/>
             <div class="timestamp">
-                Vom {info.timestamp}
+                {info.shortFormattedTimestamp}
             </div>
             <div class="message">
                 {info.textonlymessage}
@@ -23,6 +20,6 @@
             </div>
         </div>
         <span class="category">{info.feed.category.name}</span>
-
+        <img class="feedimg" src="{info.feed.picture}"/>
     </a>
 </div>

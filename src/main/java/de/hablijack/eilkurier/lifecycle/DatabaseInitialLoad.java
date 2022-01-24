@@ -107,7 +107,8 @@ public class DatabaseInitialLoad {
         "https://www.faz.net/rss/aktuell/", news).persistIfNotExist();
     new Feed("Tagesschau",
         "die erste Adresse für Nachrichten und Information: An 365 Tagen im Jahr, rund um die Uhr aktualisiert - die wichtigsten News des Tages.",
-        "https://www.tagesschau.de/tslogo-101~_v-videowebm.jpg", "image/jpg", "https://www.tagesschau.de/xml/rss2/",
+        "https://upload.wikimedia.org/wikipedia/commons/3/3c/Tagesschau_Logo_2015.svg", "image/svg",
+        "https://www.tagesschau.de/xml/rss2/",
         news).persistIfNotExist();
     new Feed("Sueddeutsche: Top-Themen",
         "die erste Adresse für Nachrichten und Information: An 365 Tagen im Jahr, rund um die Uhr aktualisiert - die wichtigsten News des Tages.",

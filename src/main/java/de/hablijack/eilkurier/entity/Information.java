@@ -3,6 +3,7 @@ package de.hablijack.eilkurier.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -74,6 +75,12 @@ public class Information extends PanacheEntity {
 
   public static Collection<? extends Information> findByFeed(Feed feed) {
     return find("feed = ?1", feed).list();
+  }
+
+  public String getShortFormattedTimestamp() {
+    String pattern = "dd.MM.";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+    return simpleDateFormat.format(this.timestamp);
   }
 
   public Set<String> getAllPicturesAsList() {
