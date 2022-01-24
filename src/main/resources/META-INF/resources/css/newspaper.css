@@ -13,6 +13,7 @@ html {
 
 body {
 	font-size: 16px;
+    line-height: 24px;
 	color: #2f2f2f;
 	background-color: #f9f7f1;
 	border: 1px solid #2f2f2f;
@@ -133,15 +134,17 @@ p {
 .columns .column {
 	margin-bottom: 20px;
 	border: 1px solid #2f2f2f;
+    padding: 10px;
+    text-align: justify;
 }
 
 .columns .column .category {
 	background-color: #2f2f2f;
 	color: #f9f7f1;
-	position: relative;
-	left: 0;
-	bottom: 7px;
-	padding: 8px;
+	position: absolute;
+    left: 0;
+    bottom: 0;
+	padding: 7px;
 	border-radius: 0 10px 0 0;
 }
 
@@ -149,8 +152,8 @@ p {
 	max-height: 70px;
 	max-width: 150px;
 	position: absolute;
-	bottom: 7px;
-	right: 7px;
+	bottom: 0px;
+	right: 0px;
 }
 
 .columns .column .body img:not([src]){
@@ -310,11 +313,16 @@ p {
 /* ######################################### SMALL ################################################################## */
 
 .columns .column-small, .columns .column-sizer {
-	width: calc(20% - 18px); /* shitty but respect outer double border width */
+	width: calc(20% - 38px); /* shitty but respect outer double border width */
+}
+
+.columns .column-sizer {
+    border: none;
 }
 
 .columns .column-small .body img  {
-	max-width: 300px;
+    position: relative;
+	width: 100%;
 	height: auto;
 }
 
