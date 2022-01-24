@@ -149,11 +149,8 @@ p {
 }
 
 .columns .column .feedimg {
-	max-height: 70px;
+	max-height: 50px;
 	max-width: 150px;
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
 }
 
 .columns .column .body img:not([src]){
