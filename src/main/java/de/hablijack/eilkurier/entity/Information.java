@@ -1,6 +1,7 @@
 package de.hablijack.eilkurier.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import java.util.Collection;
 import java.util.Date;
@@ -56,6 +57,7 @@ public class Information extends PanacheEntity {
   @Lob
   @Column
   @Type(type = "org.hibernate.type.TextType")
+  @JsonIgnore
   public String pictures;
 
   @Lob
@@ -74,8 +76,18 @@ public class Information extends PanacheEntity {
     return find("feed = ?1", feed).list();
   }
 
-  public Set<String> getPictureList() {
+  public Set<String> getAllPicturesAsList() {
     return new HashSet<String>(List.of(this.pictures.split("\\|\\|")));
+  }
+
+  public String getHeadlinePicture() {
+    return this.getAllPicturesAsList().stream().findFirst().get();
+  }
+
+  public Set<String> getRemainingPictureList() {
+    Set<String> allPictures = this.getAllPicturesAsList();
+    allPictures.remove(this.getHeadlinePicture());
+    return allPictures;
   }
 
   @Override
