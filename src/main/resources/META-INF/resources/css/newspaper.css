@@ -133,7 +133,6 @@ p {
 
 .columns .column {
 	margin-bottom: 20px;
-	border: 1px solid #2f2f2f;
     padding: 10px;
     text-align: justify;
 }
@@ -142,7 +141,7 @@ p {
 	background-color: #2f2f2f;
 	color: #f9f7f1;
 	position: absolute;
-    left: 0;
+    left: 10px;
     bottom: 0;
 	padding: 7px;
 	border-radius: 0 10px 0 0;
@@ -151,10 +150,15 @@ p {
 .columns .column .feedimg {
 	max-height: 50px;
 	max-width: 150px;
+	position: absolute;
+	bottom: 0;
+	right: 10px;
+	border-radius: 10px 0 0 0;
 }
 
 .columns .column .timestamp {
     color: #8b8b8b;
+    text-align: right;
 }
 
 .columns .column .body img:not([src]){
@@ -173,7 +177,7 @@ p {
 }
 
 .columns .column .body {
-	margin-bottom: 35px;
+	margin-bottom: 60px;
 }
 
 /* ### HEADLINES ###################################################################### */
@@ -305,7 +309,7 @@ p {
 	font-weight: 700;
 	font-size: 12px;
 	box-sizing: border-box;
-	padding: 10px 0 10px 0;
+	padding: 10px 0 0 0;
 }
 
 .columns .column .headline.hl10 {
