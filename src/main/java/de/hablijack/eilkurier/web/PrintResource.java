@@ -27,8 +27,8 @@ public class PrintResource {
   public TemplateInstance get(@QueryParam("userId") Long userId) {
     List<Information> information = new ArrayList<>();
     Set<String> categoryNames = new HashSet<>();
-    User christoph = User.findById(userId);
-    List<Subscription> subscriptions = Subscription.findByUser(christoph);
+    User user = User.findById(userId);
+    List<Subscription> subscriptions = Subscription.findByUser(user);
     for (Subscription subscription : subscriptions) {
       information.addAll(Information.findByFeed(subscription.feed));
       categoryNames.add(subscription.feed.category.name);
