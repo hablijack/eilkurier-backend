@@ -1,19 +1,23 @@
 <div class="column column-xlarge">
-    <a href="{info.link}">
+    <a href="{info.link}" target="_blank">
+        <div class="head">
+            <p class="headline hl1">
+                {info.title}
+            </p>
+        </div>
         <div class="body">
-			<span class="left">
-				<img src="{info.picture}">
-			</span>
-            <span class="right">
-				<div class="body">
-					<p class="headline hl1">{info.title}</p>
-					<span class="headline hl6">von: {info.author}</span>
-					{info.textonlymessage}
-				</div>
-				<div class="footer">
-					— {info.feed.name} {info.timestamp} Uhr —
-				</div>
-			</span>
+            <img src="{info.headlinePicture}"/>
+            <div class="timestamp">
+                ({info.feed.name} · {info.shortFormattedTimestamp})
+            </div>
+            <div class="message">
+                {info.textonlymessage}
+            </div>
+            <div class="pictures">
+                {#for picture in info.remainingPictureList}
+                <img src="{picture}"/>
+                {/for}
+            </div>
         </div>
         <span class="category">{info.feed.category.name}</span>
         <img class="feedimg" src="{info.feed.picture}"/>

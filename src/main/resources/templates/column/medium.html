@@ -1,20 +1,25 @@
-<div class="column column-middle">
-    <a href="{info.link}">
+<div class="column column-medium">
+    <a href="{info.link}" target="_blank">
         <div class="head">
             <p class="headline hl1">
                 {info.title}
             </p>
-            <p>
-                <span class="headline hl6">von: {info.author}</span>
-            </p>
         </div>
         <div class="body">
-            {info.message.raw}
+            <img src="{info.headlinePicture}"/>
+            <div class="timestamp">
+                ({info.feed.name} · {info.shortFormattedTimestamp})
+            </div>
+            <div class="message">
+                {info.textonlymessage}
+            </div>
+            <div class="pictures">
+                {#for picture in info.remainingPictureList}
+                <img src="{picture}"/>
+                {/for}
+            </div>
         </div>
-        <div class="footer">
-            — {info.feed.name} {info.timestamp} Uhr —
-        </div>
-        <span class="category">{info.feed.categories[0].name}</span>
+        <span class="category">{info.feed.category.name}</span>
         <img class="feedimg" src="{info.feed.picture}"/>
     </a>
 </div>
