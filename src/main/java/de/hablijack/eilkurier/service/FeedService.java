@@ -30,8 +30,6 @@ import org.jsoup.safety.Safelist;
 @ApplicationScoped
 public class FeedService {
 
-  public static final int MESSAGE_MAX_LENGTH = 1200;
-  public static final int MESSAGE_CUT_LENGTH = 1195;
   public static final int MESSAGE_MIN_LENGTH = 20;
 
   private static final Logger LOGGER = Logger.getLogger(FeedService.class.getName());

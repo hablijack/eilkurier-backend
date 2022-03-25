@@ -37,6 +37,7 @@ public class SubscriptionResource {
   public List<Subscription> createSubscription(List<Feed> feeds) {
     List subscriptions = new ArrayList();
     LOGGER.info("Trying to load current user...");
+    LOGGER.info(idToken.getClaimNames());
     String email = idToken.getClaim("email");
     User christoph = User.findByEmailOptional(email).get();
     LOGGER.info("Looping feeds and generating subscriptions...");
