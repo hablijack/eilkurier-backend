@@ -25,7 +25,7 @@ import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.XMLEvent;
 import org.jboss.logging.Logger;
 import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+import org.jsoup.safety.Safelist;
 
 @ApplicationScoped
 public class FeedService {
@@ -56,7 +56,9 @@ public class FeedService {
 
     HttpURLConnection conn = (HttpURLConnection) (url.openConnection());
     conn.setRequestProperty("User-Agent",
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" + " "
+        + "AppleWebKit/537.36 (KHTML, like Gecko)" + " "
+        + "Chrome/70.0.3538.77 Safari/537.36");
     conn.setInstanceFollowRedirects(true);
     conn.connect();
     XMLEventReader eventReader = inputFactory.createXMLEventReader(conn.getInputStream());
@@ -96,56 +98,56 @@ public class FeedService {
           item.enclosure = getCharacterData(eventReader);
         }
       } else if (event.isEndElement()
-          && event.asEndElement().getName().getLocalPart().contains(RSSTag.ITEM.getName())) {
+          && event.asEndElement().getName().getLocalPart().contains(RSSTag.ITEM.getName())
+          && item.hasGUID()
+          && !Information.existsByGuidAndFeed(item.guid, feed)) {
 
-        if (item.hasGUID() && !Information.existsByGuidAndFeed(item.guid, feed)) {
-          Information info = new Information();
-          info.feed = feed;
-          if (item.author == null || item.author.isEmpty()) {
-            info.author = feed.name;
-          } else {
-            info.author = item.author;
-          }
-          String message = "";
-          if (item.hasContent()) {
-            message = item.content;
-          }
+        Information info = new Information();
+        info.feed = feed;
+        if (item.author == null || item.author.isEmpty()) {
+          info.author = feed.name;
+        } else {
+          info.author = item.author;
+        }
+        String message = "";
+        if (item.hasContent()) {
+          message = item.content;
+        }
 
-          if (message.length() < MESSAGE_MIN_LENGTH) {
-            continue;
-          }
+        if (message.length() < MESSAGE_MIN_LENGTH) {
+          continue;
+        }
 
-          Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
-          Matcher imageMatcher = regexImagePattern.matcher(message);
-          List<String> images = new ArrayList<>();
-          while (imageMatcher.find()) {
-            if (imageMatcher.group(1).contains("http")) {
-              String image = imageMatcher.group(1);
-              if (!isBlacklisted(image)) {
-                images.add(imageMatcher.group(1));
-              }
+        Pattern regexImagePattern = Pattern.compile("src=\"(.*?)\"");
+        Matcher imageMatcher = regexImagePattern.matcher(message);
+        List<String> images = new ArrayList<>();
+        while (imageMatcher.find()) {
+          if (imageMatcher.group(1).contains("http")) {
+            String image = imageMatcher.group(1);
+            if (!isBlacklisted(image)) {
+              images.add(imageMatcher.group(1));
             }
           }
-          info.pictures = String.join("||", images);
-          if (item.image != null && item.image.length() > 0) {
-            info.pictures += item.image + "||" + info.pictures;
-          }
-
-          String textonlymessage = message.replace("<![CDATA", "").replace("]]", "");
-          info.textonlymessage = Jsoup.clean(textonlymessage, Whitelist.none());
-          info.guid = item.guid;
-          info.link = item.link;
-          info.title = item.title;
-          try {
-            info.timestamp = item.getPubdate();
-          } catch (Exception ex) {
-            info.timestamp = new Date();
-            LOGGER.error(item.pubdate);
-          }
-          info.feed.language = item.language;
-          info.feed.copyright = item.copyright;
-          info.persist();
         }
+        info.pictures = String.join("||", images);
+        if (item.image != null && item.image.length() > 0) {
+          info.pictures += item.image + "||" + info.pictures;
+        }
+
+        String textonlymessage = message.replace("<![CDATA", "").replace("]]", "");
+        info.textonlymessage = Jsoup.clean(textonlymessage, Safelist.none());
+        info.guid = item.guid;
+        info.link = item.link;
+        info.title = item.title;
+        try {
+          info.timestamp = item.getPubdate();
+        } catch (Exception ex) {
+          info.timestamp = new Date();
+          LOGGER.error(item.pubdate);
+        }
+        info.feed.language = item.language;
+        info.feed.copyright = item.copyright;
+        info.persist();
       }
     }
     conn.disconnect();
@@ -170,7 +172,7 @@ public class FeedService {
       return "";
     }
   }
-
+/*
   private String truncateMessageBody(String input, int size) {
     if (input.length() < size) {
       return input;
@@ -204,5 +206,5 @@ public class FeedService {
       lastTagStart = size;
     }
     return input.substring(0, lastTagStart);
-  }
+  }*/
 }

@@ -1,7 +1,6 @@
 package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Category;
-import de.hablijack.eilkurier.entity.Feed;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.vertx.mutiny.core.eventbus.EventBus;
 import java.util.List;
