@@ -5,6 +5,8 @@ import de.hablijack.eilkurier.entity.Subscription;
 import de.hablijack.eilkurier.entity.User;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.quarkus.oidc.IdToken;
+import io.quarkus.security.identity.SecurityIdentity;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
@@ -26,19 +28,17 @@ public class SubscriptionResource {
   private static final Logger LOGGER = Logger.getLogger(SubscriptionResource.class.getName());
 
   @Inject
-  @IdToken
-  JsonWebToken idToken;
-
+  SecurityIdentity securityIdentity;
+  
   @POST
   @Path("categories/feeds/subscriptions/bulk")
   @Consumes(MediaType.APPLICATION_JSON)
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   @Transactional
   public List<Subscription> createSubscription(List<Feed> feeds) {
-    List subscriptions = new ArrayList();
+    List<Subscription> subscriptions = new ArrayList<>();
     LOGGER.info("Trying to load current user...");
-    LOGGER.info(idToken.getClaimNames());
-    String email = idToken.getClaim("email");
+    String email = securityIdentity.getPrincipal().getName();
     User christoph = User.findByEmailOptional(email).get();
     LOGGER.info("Looping feeds and generating subscriptions...");
     for (Feed feed : feeds) {
@@ -58,7 +58,7 @@ public class SubscriptionResource {
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
   public List<Subscription> getByUser() {
     LOGGER.info("Trying to load current user...");
-    String email = idToken.getClaim("email");
+    String email = securityIdentity.getPrincipal().getName();
     User christoph = User.findByEmailOptional(email).get();
     LOGGER.info("Trying to load subscriptions for user...");
     return Subscription.findByUser(christoph);
