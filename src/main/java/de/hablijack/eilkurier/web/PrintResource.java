@@ -3,6 +3,7 @@ package de.hablijack.eilkurier.web;
 import de.hablijack.eilkurier.entity.Information;
 import de.hablijack.eilkurier.entity.Subscription;
 import de.hablijack.eilkurier.entity.User;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.quarkus.qute.Location;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
@@ -24,6 +25,7 @@ public class PrintResource {
 
   @GET
   @Produces(MediaType.TEXT_HTML)
+  @SuppressFBWarnings(value = "DLS_DEAD_LOCAL_STORE")
   public TemplateInstance get(@QueryParam("userId") Long userId) {
     List<Information> information = new ArrayList<>();
     Set<String> categoryNames = new HashSet<>();

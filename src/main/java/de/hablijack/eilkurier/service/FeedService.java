@@ -74,8 +74,6 @@ public class FeedService {
           }
         } else if (localPart.contains(RSSTag.TITLE.getName())) {
           item.title = getCharacterData(eventReader);
-        } else if (localPart.contains(RSSTag.DESCRIPTION.getName())) {
-          item.description = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.LINK.getName())) {
           item.link = getCharacterData(eventReader);
         } else if (localPart.contains(RSSTag.GUID.getName())) {

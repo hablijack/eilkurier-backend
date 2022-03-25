@@ -7,7 +7,6 @@ import java.util.Date;
 public class RssItem {
   public boolean isFeedHeader = true;
   public String copyright;
-  public String description;
   public String content;
   public String title;
   public String image;
