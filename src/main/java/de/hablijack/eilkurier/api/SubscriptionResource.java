@@ -4,7 +4,7 @@ import de.hablijack.eilkurier.entity.Feed;
 import de.hablijack.eilkurier.entity.Subscription;
 import de.hablijack.eilkurier.entity.User;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import io.quarkus.oidc.IdToken;
+//import io.quarkus.oidc.IdToken;
 import io.quarkus.security.identity.SecurityIdentity;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import org.eclipse.microprofile.jwt.JsonWebToken;
+//import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")
