@@ -10,9 +10,9 @@ jobs:
       - run:
           name: Spotbugs
           command: ./mvnw clean compile spotbugs:check
-      - run:
-          name: PMD
-          command: ./mvnw clean compile pmd:check
+      #- run:
+      #    name: PMD
+      #    command: ./mvnw clean compile pmd:check
       - run:
           name: Checkstyle
           command: ./mvnw clean compile checkstyle:check
