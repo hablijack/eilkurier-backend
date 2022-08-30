@@ -16,6 +16,8 @@ jobs:
           command: ./mvnw clean compile checkstyle:check
 
   build:
+    machine: 
+      image: ubuntu-2004:202010-01
     resource_class: medium
     working_directory: ~/repo
     environment:
