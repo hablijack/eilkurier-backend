@@ -14,7 +14,7 @@
 # docker run -i --rm -p 8080:8080 quarkus/eilkurier-backend
 #
 ###
-FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6-902.1661794353
+FROM registry.access.redhat.com/ubi8/ubi-minimal:8.6-941
 
 ARG AUTH0_CLIENT_ID
 ARG AUTH0_AUTH_SERVER
