@@ -213,7 +213,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.19.0</version>
+                <version>3.21.2</version>
                 <executions>
                     <execution>
                         <goals>
