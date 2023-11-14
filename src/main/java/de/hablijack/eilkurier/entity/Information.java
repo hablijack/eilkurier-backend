@@ -9,15 +9,15 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import org.eclipse.microprofile.graphql.Description;
 import org.hibernate.annotations.Type;
 
@@ -39,7 +39,6 @@ public class Information extends PanacheEntity {
 
   @Lob
   @Column(nullable = false)
-  @Type(type = "org.hibernate.type.TextType")
   public String title;
 
   @Column(nullable = false)
@@ -47,23 +46,19 @@ public class Information extends PanacheEntity {
 
   @Lob
   @Column(nullable = false)
-  @Type(type = "org.hibernate.type.TextType")
   public String author;
 
   @Lob
   @Column(nullable = false)
-  @Type(type = "org.hibernate.type.TextType")
   public String link;
 
   @Lob
   @Column
-  @Type(type = "org.hibernate.type.TextType")
   @JsonIgnore
   public String pictures;
 
   @Lob
   @Column(nullable = false)
-  @Type(type = "org.hibernate.type.TextType")
   public String textonlymessage;
 
   @ManyToOne(fetch = FetchType.LAZY)

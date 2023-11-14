@@ -3,9 +3,9 @@ package de.hablijack.eilkurier.api;
 import de.hablijack.eilkurier.entity.Information;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 @Path("api")
 @ApplicationScoped
