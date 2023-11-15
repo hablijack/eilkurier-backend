@@ -19,7 +19,6 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 import org.eclipse.microprofile.graphql.Description;
-import org.hibernate.annotations.Type;
 
 
 @Entity
