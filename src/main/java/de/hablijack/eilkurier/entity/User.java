@@ -3,12 +3,12 @@ package de.hablijack.eilkurier.entity;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import java.util.Optional;
-import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.Optional;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "eilkurier")

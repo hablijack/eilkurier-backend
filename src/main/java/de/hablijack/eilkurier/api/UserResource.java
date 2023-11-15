@@ -2,13 +2,13 @@ package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.User;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.util.Optional;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
+import java.util.Optional;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")

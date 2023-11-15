@@ -5,8 +5,6 @@ import de.hablijack.eilkurier.entity.Subscription;
 import de.hablijack.eilkurier.entity.User;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.quarkus.security.identity.SecurityIdentity;
-import java.util.ArrayList;
-import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -15,6 +13,8 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")

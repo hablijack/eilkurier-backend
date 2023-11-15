@@ -3,11 +3,11 @@ package de.hablijack.eilkurier.api;
 import de.hablijack.eilkurier.entity.Category;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.vertx.mutiny.core.eventbus.EventBus;
-import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import java.util.List;
 import org.jboss.logging.Logger;
 
 //@RolesAllowed("user")

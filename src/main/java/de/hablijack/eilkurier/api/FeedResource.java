@@ -3,13 +3,13 @@ package de.hablijack.eilkurier.api;
 import de.hablijack.eilkurier.entity.Feed;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.vertx.mutiny.core.eventbus.EventBus;
-import java.io.IOException;
-import java.util.List;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
+import java.io.IOException;
+import java.util.List;
 import javax.xml.stream.XMLStreamException;
 import org.jboss.logging.Logger;
 
