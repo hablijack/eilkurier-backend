@@ -26,6 +26,7 @@ public class SubscriptionResource {
 
   @Inject
   SecurityIdentity securityIdentity;
+
   @POST
   @Path("categories/feeds/subscriptions/bulk")
   @Consumes(MediaType.APPLICATION_JSON)

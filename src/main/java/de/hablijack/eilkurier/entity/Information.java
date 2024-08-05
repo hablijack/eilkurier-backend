@@ -3,6 +3,7 @@ package de.hablijack.eilkurier.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.vertx.core.cli.annotations.Description;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -18,22 +19,17 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.microprofile.graphql.Description;
 
 
 @Entity
 @Table(name = "information", schema = "eilkurier")
-@org.eclipse.microprofile.graphql.Type
-@Description("The actual news to be consumed")
 public class Information extends PanacheEntity {
 
   @Transient
-  @Description("Ranking of the information, how important that news is for you.")
   public final int weight = 0;
 
   @Column(nullable = false)
   @Temporal(TemporalType.TIMESTAMP)
-  @Description("Point in time when this news were produced")
   public Date timestamp;
 
   @Lob

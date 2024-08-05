@@ -78,8 +78,6 @@ public class DatabaseInitialLoad {
     new Feed("Guitar", "Magazin für Gitarristen und Bassisten",
         "https://guitar.de/images/touchicons/apple-touch-icon-180x180.png", "image/png",
         "https://music-product-news.de/gitarre-und-bass?format=feed&type=rss", music).persistIfNotExist();
-    new Feed("Keys", "Musik und Computer", "https://www.keys.de/images/touchicons/apple-touch-icon-180x180.png",
-        "image/png", "https://www.keys.de/?format=feed&type=rss", music).persistIfNotExist();
     new Feed("Gearnews", "Der Equipment-Blog mit heißen News für Gitarren",
         "https://www.gearnews.de/favicons/apple-icon-180x180.png",
         "image/png", "https://www.gearnews.de/bereich/gitarre/feed/", music).persistIfNotExist();
@@ -117,7 +115,7 @@ public class DatabaseInitialLoad {
     new Feed("Sueddeutsche: Alle-Themen",
         "die erste Adresse für Nachrichten und Information: An 365 Tagen im Jahr, rund um die Uhr aktualisiert - die wichtigsten News des Tages.",
         "https://id.sueddeutsche.de/img/sz_logo.png", "image/png",
-        "https://rss.sueddeutsche.de/app/service/rss/alles/index.rss?output=rss", news).persistIfNotExist();
+        "https://rss.sueddeutsche.de/alles", news).persistIfNotExist();
     new Feed("Sueddeutsche: Eilmeldungen",
         "die erste Adresse für Nachrichten und Information: An 365 Tagen im Jahr, rund um die Uhr aktualisiert - die wichtigsten News des Tages.",
         "https://id.sueddeutsche.de/img/sz_logo.png", "image/png", "https://rss.sueddeutsche.de/rss/Eilmeldungen",

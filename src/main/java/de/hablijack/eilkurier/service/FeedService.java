@@ -13,7 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -34,7 +33,7 @@ public class FeedService {
 
   private static final Logger LOGGER = Logger.getLogger(FeedService.class.getName());
 
-  private static final List<String> BLACKLIST_DOMAIN_LIST = Arrays.asList("cpx.golem.de");
+  private static final List<String> BLACKLIST_DOMAIN_LIST = List.of("cpx.golem.de");
 
   @Transactional
   @ConsumeEvent(value = "fetch_feed_information", blocking = true)
@@ -63,8 +62,13 @@ public class FeedService {
     XMLEventReader eventReader = inputFactory.createXMLEventReader(conn.getInputStream());
 
     while (eventReader.hasNext()) {
-      XMLEvent event = eventReader.nextEvent();
-      if (event.isStartElement()) {
+      XMLEvent event = null;
+      try {
+        event = eventReader.nextEvent();
+      } catch(Exception exception) {
+        LOGGER.error("Error on parsing Feed: " + feed.url + ". => ", exception);
+      }
+      if (event != null && event.isStartElement()) {
         String localPart = event.asStartElement().getName().getLocalPart();
         if (localPart.equals("encoded")) {
           localPart = event.asStartElement().getName().getPrefix();
@@ -94,7 +98,7 @@ public class FeedService {
         } else if (localPart.contains(RSSTag.ENCLOSURE.getName())) {
           item.enclosure = getCharacterData(eventReader);
         }
-      } else if (event.isEndElement()
+      } else if (event != null && event.isEndElement()
           && event.asEndElement().getName().getLocalPart().contains(RSSTag.ITEM.getName())
           && item.hasGUID()
           && !Information.existsByGuidAndFeed(item.guid, feed)) {
@@ -127,7 +131,7 @@ public class FeedService {
           }
         }
         info.pictures = String.join("||", images);
-        if (item.image != null && item.image.length() > 0) {
+        if (item.image != null && !item.image.isEmpty()) {
           info.pictures += item.image + "||" + info.pictures;
         }
 

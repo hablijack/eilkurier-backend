@@ -7,13 +7,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.List;
-import org.eclipse.microprofile.graphql.Description;
 import org.jboss.logging.Logger;
 
 @Entity
 @Table(name = "subscription", schema = "eilkurier")
-@org.eclipse.microprofile.graphql.Type
-@Description("Users subscribe to feeds")
 public class Subscription extends PanacheEntity {
 
   private static final Logger LOGGER = Logger.getLogger(Subscription.class.getName());

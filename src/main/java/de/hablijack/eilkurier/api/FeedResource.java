@@ -2,6 +2,7 @@ package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Feed;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.mutiny.core.eventbus.EventBus;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -34,12 +35,13 @@ public class FeedResource {
   @GET
   @Path("categories/feeds/import")
   @SuppressFBWarnings(value = "", justification = "Security is another Epic and on TODO")
-  public void startImport() throws XMLStreamException, IOException {
+  public String startImport() throws XMLStreamException, IOException {
     LOGGER.info("Starting to fetch Feeds...");
     List<Feed> allFeeds = Feed.listAll();
     for (Feed feed : allFeeds) {
       eventBus.send("fetch_feed_information", feed);
     }
     LOGGER.info("Feeds fetched successfully.");
+    return "";
   }
 }

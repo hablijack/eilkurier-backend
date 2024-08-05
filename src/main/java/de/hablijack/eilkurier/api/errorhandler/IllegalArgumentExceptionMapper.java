@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
-import org.apache.http.HttpStatus;
 import org.jboss.logging.Logger;
 
 
@@ -22,6 +21,6 @@ public class IllegalArgumentExceptionMapper implements ExceptionMapper<IllegalAr
     } catch (JsonProcessingException e) {
       responseJSON = "";
     }
-    return Response.status(HttpStatus.SC_BAD_REQUEST).entity(responseJSON).type(MediaType.APPLICATION_JSON).build();
+    return Response.status(Response.Status.BAD_REQUEST).entity(responseJSON).type(MediaType.APPLICATION_JSON).build();
   }
 }
