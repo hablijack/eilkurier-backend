@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.stream.XMLEventReader;
@@ -45,14 +46,14 @@ public class FeedService {
     XMLInputFactory inputFactory = XMLInputFactory.newInstance();
     inputFactory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);
     inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-    URL url = new URL(feed.url);
+    URL url = java.net.URI.create(feed.url).toURL();
     InetAddress inetAddress = InetAddress.getByName(url.getHost());
     if (!url.getProtocol().startsWith("https") || inetAddress.isAnyLocalAddress() || inetAddress.isLoopbackAddress()
         || inetAddress.isLinkLocalAddress()) {
       throw new IOException("Attack dected!");
     }
 
-    HttpURLConnection conn = (HttpURLConnection) (url.openConnection());
+    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     conn.setRequestProperty("User-Agent",
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" + " "
         + "AppleWebKit/537.36 (KHTML, like Gecko)" + " "
@@ -65,8 +66,10 @@ public class FeedService {
       XMLEvent event = null;
       try {
         event = eventReader.nextEvent();
-      } catch(Exception exception) {
+      } catch(XMLStreamException exception) {
         LOGGER.error("Error on parsing Feed: " + feed.url + ". => ", exception);
+      } catch(NoSuchElementException exception) {
+        event = null;
       }
       if (event != null && event.isStartElement()) {
         String localPart = event.asStartElement().getName().getLocalPart();

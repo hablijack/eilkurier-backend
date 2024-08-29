@@ -75,9 +75,6 @@ public class DatabaseInitialLoad {
     new Feed("GITARRE & BASS", "Das Musiker-Fachmagazin",
         "https://www.gitarrebass.de/wp-content/uploads/2015/04/GITARRE-BASS_Logo.png", "image/png",
         "https://www.gitarrebass.de/feed/", music).persistIfNotExist();
-    new Feed("Guitar", "Magazin für Gitarristen und Bassisten",
-        "https://guitar.de/images/touchicons/apple-touch-icon-180x180.png", "image/png",
-        "https://music-product-news.de/gitarre-und-bass?format=feed&type=rss", music).persistIfNotExist();
     new Feed("Gearnews", "Der Equipment-Blog mit heißen News für Gitarren",
         "https://www.gearnews.de/favicons/apple-icon-180x180.png",
         "image/png", "https://www.gearnews.de/bereich/gitarre/feed/", music).persistIfNotExist();
@@ -106,7 +103,7 @@ public class DatabaseInitialLoad {
     new Feed("Tagesschau",
         "die erste Adresse für Nachrichten und Information: An 365 Tagen im Jahr, rund um die Uhr aktualisiert - die wichtigsten News des Tages.",
         "https://upload.wikimedia.org/wikipedia/commons/3/3c/Tagesschau_Logo_2015.svg", "image/svg",
-        "https://www.tagesschau.de/xml/rss2/",
+        "https://www.tagesschau.de/infoservices/alle-meldungen-100~rss2.xml",
         news).persistIfNotExist();
     new Feed("Sueddeutsche: Top-Themen",
         "die erste Adresse für Nachrichten und Information: An 365 Tagen im Jahr, rund um die Uhr aktualisiert - die wichtigsten News des Tages.",

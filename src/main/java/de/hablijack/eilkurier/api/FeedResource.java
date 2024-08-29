@@ -2,7 +2,6 @@ package de.hablijack.eilkurier.api;
 
 import de.hablijack.eilkurier.entity.Feed;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import io.netty.handler.codec.http.HttpResponseStatus;
 import io.vertx.mutiny.core.eventbus.EventBus;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
