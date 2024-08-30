@@ -39,7 +39,7 @@ public class FeedService {
   @Transactional
   @ConsumeEvent(value = "fetch_feed_information", blocking = true)
   @SuppressFBWarnings(value = {"URLCONNECTION_SSRF_FD", "MODIFICATION_AFTER_VALIDATION"},
-          justification = "we validated our URLs often enough...")
+      justification = "we validated our URLs often enough...")
   // TODO: Organize Method with private helpers
   public void fetchFeedInformation(Feed feed) throws IOException, XMLStreamException {
     RssItem item = new RssItem();
@@ -56,8 +56,8 @@ public class FeedService {
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     conn.setRequestProperty("User-Agent",
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" + " "
-        + "AppleWebKit/537.36 (KHTML, like Gecko)" + " "
-        + "Chrome/70.0.3538.77 Safari/537.36");
+            + "AppleWebKit/537.36 (KHTML, like Gecko)" + " "
+            + "Chrome/70.0.3538.77 Safari/537.36");
     conn.setInstanceFollowRedirects(true);
     conn.connect();
     XMLEventReader eventReader = inputFactory.createXMLEventReader(conn.getInputStream());
@@ -66,9 +66,9 @@ public class FeedService {
       XMLEvent event = null;
       try {
         event = eventReader.nextEvent();
-      } catch(XMLStreamException exception) {
+      } catch (XMLStreamException exception) {
         LOGGER.error("Error on parsing Feed: " + feed.url + ". => ", exception);
-      } catch(NoSuchElementException exception) {
+      } catch (NoSuchElementException exception) {
         event = null;
       }
       if (event != null && event.isStartElement()) {
